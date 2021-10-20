@@ -1,27 +1,24 @@
-import React, {useState } from 'react'
-import CIcon from '@coreui/icons-react'
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react'
 import {
-    CButton,
-    CCard,
-    CCardBody,
-    CCardFooter,
-    CCardHeader,
-    CCol,
-    CForm,
-    CFormGroup,
-    CInput,
-    CLabel,
-    CSelect,
+  CButton,
+  CCardBody,
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalHeader,
+  CModalTitle,
+  CRow,
+  CCol,
+  CForm,
+  CFormGroup,
+  CInput,
+  CLabel,
+  CSelect,
 } from '@coreui/react'
-import {
-    AddStudents,
-} from "../../actions/studentsActions";
-const Register = () => {
+
+const Modals = (props) => {
     const [data, setData] = useState({});
     const [user, setUser] = useState({});
-    const dispatch = useDispatch();
-
     const handleChange = (e) => {
         const target = e.target;
         const value = target.value;
@@ -46,26 +43,31 @@ const Register = () => {
             [name]: value
         })
     }
-    const handleSubmit = (e) => {
-        const create = {
-            userId: data.userId,
-            name: data.name,
-            surname: data.surname,
-            advisorId: data.advisorId,
-            user: user
-        }
-        e.preventDefault();
-        dispatch(AddStudents({ ...create }));
-        document.getElementById("resetStudent").reset()
-    }
-
-    return (
-        <CCol xs="12" md="15">
-            <CCard>
-                <CCardHeader>
-                    Register new student
-                </CCardHeader>
-                <CCardBody>
+    // const handleSubmit = (e) => {
+    //     const create = {
+    //         userId: data.userId,
+    //         name: data.name,
+    //         surname: data.surname,
+    //         advisorId: data.advisorId,
+    //         user: user
+    //     }
+    //     e.preventDefault();
+    //     dispatch(AddStudents({ ...create }));
+    //     document.getElementById("resetStudent").reset()
+    // }
+  return (
+    <CRow>
+          <CCardBody>
+              <CModal 
+              show={props.modal} 
+              onClose={() => props.setModal(!props.modal)}
+              color="primary"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Edit Student</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CCardBody>
                     <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" id="resetStudent">
                         <CFormGroup row>
                             <CCol md="3">
@@ -139,14 +141,19 @@ const Register = () => {
                         </CFormGroup>
                     </CForm>
                 </CCardBody>
-                <CCardFooter>
-                    <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" onClick={handleSubmit} /> Submit</CButton>
-                    <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
-                </CCardFooter>
-            </CCard>
-        </CCol>
-    )
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="primary" onClick={() => props.setModal(!props.modal)}>
+                  Save changes
+                </CButton>{' '}
+                <CButton color="secondary" onClick={() =>  props.setModal(!props.modal)}>
+                  Cancel
+                </CButton>
+              </CModalFooter>
+            </CModal>
+          </CCardBody>
+    </CRow>
+  )
 }
 
-export default Register
-
+export default Modals

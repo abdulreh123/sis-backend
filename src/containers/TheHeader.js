@@ -49,7 +49,11 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo"/>
+        <CIcon
+         className="c-sidebar-brand-full"
+          name="logo-negative"
+          src="https://neu.edu.tr/wp-content/uploads/2018/11/01/neu-42-years-in-education.png"
+          height={40}/>
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">

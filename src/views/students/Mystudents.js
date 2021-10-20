@@ -1,16 +1,22 @@
 import React,{useEffect,useState} from 'react'
 import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
+import {Link} from 'react-router-dom'
 import Edit from './EditStudent'
 import {
-  fetchStudents,
+  getStudentByAdvisor,
 } from "../../actions/studentsActions";
-const AllStudent = () => {
-    const students = useSelector((state) => state.student.students);
+import styled from 'styled-components'
+const LinkName = styled(Link)`
+  color: #8d0000 !important;
+`;
+const MyStudent = () => {
+    const students = useSelector((state) => state.student.advisor);
+    const advisor = useSelector((state) => state.auth.user.userId);
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchStudents());
+        dispatch(getStudentByAdvisor(advisor));
     }, [dispatch]);
 
     let columns = [
@@ -22,7 +28,12 @@ const AllStudent = () => {
         {
           selector: "name",
           name: "Name",
-          sortable: true,},
+          sortable: true,
+          cell: (row) => <LinkName to={`/student-profile/${row.id}`}>
+            {row.name + " " + row.surname}
+           </LinkName>
+           
+        },
         {
           selector: "surname",
           name: "Surname",
@@ -71,4 +82,4 @@ const AllStudent = () => {
   )
 }
 
-export default AllStudent
+export default MyStudent

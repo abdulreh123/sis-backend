@@ -2,32 +2,30 @@ import React,{useEffect} from 'react'
 import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  fetchGroup
-} from "../../actions/groupActions";
-const AllGroupss = () => {
-    const Groups = useSelector((state) => state.group.groups);
-    const Group = useSelector((state) => state.group.group);
+  fetchBuildings
+} from "../../actions/buildingActions";
+const AllBuildings = () => {
+    const buildings = useSelector((state) => state.building.buildings);
+    const building = useSelector((state) => state.building.buildings);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchGroup());
-    }, [dispatch,Group]);
+        dispatch(fetchBuildings());
+    }, [dispatch,building]);
+
     let columns = [
         {
           selector: "name",
           name: "Name",
+          sortable: true,},
+        {
+          selector: "longitude",
+          name: "Longitude",
           sortable: true
         },
         {
-          selector: "name",
-          name: "Course",
-          sortable: true,
-          cell: (row) => (<p>{row.Course.name}</p>)
-        },
-        {
-          selector: "code",
-          name: "Code",
-          sortable: true,
-          cell: (row) => (<p>{row.Course.code}</p>)
+          selector: "latitude",
+          name: "Latitude",
+          sortable: true
         },
         {
           name: "Actions",
@@ -56,7 +54,7 @@ const AllGroupss = () => {
     
     <DataTable
             columns={columns}
-            data={Groups ? Groups : []}
+            data={buildings ? buildings : []}
             striped={true}
             responsive={true}
             pagination={true}
@@ -68,4 +66,4 @@ const AllGroupss = () => {
   )
 }
 
-export default AllGroupss
+export default AllBuildings

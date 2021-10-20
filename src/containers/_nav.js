@@ -7,11 +7,11 @@ const _nav =  [
     name: 'Dashboard',
     to: '/dashboard',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
-    permissions:['Student','Advisor','Chairman'],
+    permissions:['Student','Advisor','Chairman',"SuperAdmin"],
   },
   {
     _tag: 'CSidebarNavTitle',
-    permissions:['Advisor','Chairman'],
+    permissions:['Advisor','Chairman',"SuperAdmin"],
   },
   
   {
@@ -19,19 +19,25 @@ const _nav =  [
     name: 'Students',
     route: '/students',
     icon: 'cil-user',
-    permissions:['Advisor','Chairman'],
+    permissions:['Advisor','Chairman',"SuperAdmin"],
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: 'My Students',
+        name: 'All Students',
         to: '/student',
-        permissions:['Advisor','Chairman'],
+        permissions:['Chairman',"SuperAdmin"],
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'My Students',
+        to: '/mystudent',
+        permissions:['Advisor',"SuperAdmin"],
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Register Students',
         to: '/registerStudent',
-        permissions:['Chairman'],
+        permissions:['Chairman',"SuperAdmin"],
       },
     ],
   },
@@ -40,19 +46,19 @@ const _nav =  [
     name: 'Departments',
     route: '/departments',
     icon: 'cil-building',
-    permissions:['Chairman'],
+    permissions:['Chairman',"SuperAdmin"],
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Departments',
         to: '/departments',
-        permissions:['Chairman']
+        permissions:['Chairman',"SuperAdmin"]
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Create Department',
         to: '/createDepartment',
-        permissions:['Chairman']
+        permissions:['Chairman',"SuperAdmin"]
       },
     ],
   },
@@ -61,25 +67,52 @@ const _nav =  [
     name: 'Courses',
     route: '/courses',
     icon: 'cil-book',
-    permissions:['Student','Advisor','Chairman'],
+    permissions:['Student','Advisor','Chairman',"SuperAdmin"],
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Courses',
         to: '/courses',
-        permissions:['Student','Advisor','Chairman']
+        permissions:['Student','Advisor','Chairman',"SuperAdmin"]
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Create Course',
         to: '/create-courses',
-        permissions:['Chairman']
+        permissions:['Chairman',"SuperAdmin"]
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Course group',
+        to: '/groups',
+        permissions:['Chairman',"SuperAdmin"]
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Create group',
+        to: '/create-groups',
+        permissions:['Chairman',"SuperAdmin"]
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Transcript',
         to: '/my-courses',
-        permissions:['Student']
+        permissions:['Student',"SuperAdmin"]
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Buildings',
+    route: '/buildings',
+    icon: 'cil-book',
+    permissions:['Chairman',"SuperAdmin"],
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Buildings',
+        to: '/buildings',
+        permissions:['Chairman',"SuperAdmin"]
       },
     ],
   },

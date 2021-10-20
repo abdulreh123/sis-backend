@@ -1,48 +1,25 @@
 import {
-    GET_STUDENTS,
-    ADD_STUDENT,
-    GET__ADVISOR_STUDENTS,
-    GET_STUDENT,
-    GET_TRANSCRIPT,
-    GET_AUTO_COURSE
+    GET_ADVISOR,
+    ADD_ADVISOR,
 } from '../actions/types';
 
 const initialState = {
-    students: [],
-    advisor: [],
-    autoCourse:[],
-    student: {},
-    studentCourse:[]
+    advisors: [],
+    advisor: {},
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
 
-        case GET_STUDENTS:
+        case GET_ADVISOR:
             return {
                 ...state,
-                students: action.payload
+                advisors: action.payload
             }
-        case GET_AUTO_COURSE:
-            return {
-                ...state,
-                autoCourse: action.payload
-            }
-        case GET__ADVISOR_STUDENTS:
+        case ADD_ADVISOR:
             return {
                 ...state,
                 advisor: action.payload
-            }
-        case GET_STUDENT:
-        case ADD_STUDENT:
-            return {
-                ...state,
-                student: action.payload
-            }
-        case GET_TRANSCRIPT:
-            return {
-                ...state,
-                studentCourse: action.payload
             }
         // case GET_BRANCH:
         // case UPDATE_BRANCH:

@@ -65,6 +65,7 @@ const TheSidebar = () => {
         <CIcon
           className="c-sidebar-brand-minimized"
           name="sygnet"
+          src="https://neu.edu.tr/wp-content/uploads/2018/11/01/YDU_LOGO.png"
           height={35}
         />
       </CSidebarBrand>

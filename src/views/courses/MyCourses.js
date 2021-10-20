@@ -54,7 +54,7 @@ const StudentCourses = () => {
     const courses = useSelector((state) => state.student.studentCourse);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getTranscript(user?.id));
+        dispatch(getTranscript(user?.userId));
     }, [dispatch,user]);
   return (
     <BranchWrapper>

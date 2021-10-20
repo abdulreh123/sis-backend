@@ -1,7 +1,8 @@
 import { returnErrors } from "./errorActions";
 import {
     GET_GROUPS,
-    ADD_GROUP
+    ADD_GROUP,
+    GET_DEPARTMENT_GROUP
 } from './types';
 import axios from 'axios';
 //import Cookies from 'js-cookie';
@@ -24,6 +25,18 @@ export const getGroup = (id) => dispatch => {
         .then(group => {
             dispatch({
                 type: ADD_GROUP,
+                payload: group.data.data
+            });
+        })
+       .catch(error => {
+        dispatch(returnErrors(error.response.data.message, error.response.status));
+       })
+}
+export const getGroupDepartment = (id) => dispatch => {
+    axios.get(`/api/group/department/${id}` )
+        .then(group => {
+            dispatch({
+                type: GET_DEPARTMENT_GROUP,
                 payload: group.data.data
             });
         })

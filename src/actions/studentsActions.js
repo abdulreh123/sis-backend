@@ -1,6 +1,9 @@
+import { returnErrors } from "./errorActions";
 import {
     GET_STUDENTS,
+    GET__ADVISOR_STUDENTS,
     ADD_STUDENT,
+    GET_AUTO_COURSE,
     GET_TRANSCRIPT,
     GET_STUDENT
 } from './types';
@@ -16,9 +19,9 @@ export const fetchStudents = () => dispatch => {
                 payload: api.data.data
             });
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 }
 export const getStudent = (id) => dispatch => {
     axios.get(`/api/student/${id}`,  )
@@ -28,9 +31,21 @@ export const getStudent = (id) => dispatch => {
                 payload: branch.data.data
             });
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+}
+export const getStudentByAdvisor = (id) => dispatch => {
+    axios.get(`/api/student/advisor/${id}`,  )
+        .then(branch => {
+            dispatch({
+                type: GET__ADVISOR_STUDENTS,
+                payload: branch.data.data
+            });
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 }
 export const getTranscript = (id) => dispatch => {
     axios.get(`/api/student/transcript/${id}`,  )
@@ -40,9 +55,9 @@ export const getTranscript = (id) => dispatch => {
                 payload: branch.data.data
             });
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 }
 export const AddStudents = (data) => (dispatch) => {
     axios.post("/api/student/create", data,  )
@@ -53,9 +68,9 @@ export const AddStudents = (data) => (dispatch) => {
             });
            // dispatch(returnErrors(branch.data.message, branch.status));
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 
  }
 export const updateStudent = (data, id) => (dispatch) => {
@@ -65,14 +80,42 @@ export const updateStudent = (data, id) => (dispatch) => {
                 type: ADD_STUDENT,
                 payload: branch.data.data
             });
-          //  dispatch(returnErrors(branch.data.message, branch.status));
+           dispatch(returnErrors(branch.data.message, branch.status));
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 
 }
-export const deleteBranch = (id) => (dispatch) => {
+export const AddRemoveCourses = (id, data) => (dispatch) => {
+    axios.put(`/api/student/add/remove/${id}`, data,  )
+        .then(branch => {
+            dispatch({
+                type: ADD_STUDENT,
+                payload: branch.data.data
+            });
+           dispatch(returnErrors(branch.data.message, branch.status));
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+
+}
+export const automate = (id, year) => (dispatch) => {
+    axios.get(`/api/student/automate/${id}?year=${year}`, )
+        .then(branch => {
+            dispatch({
+                type: GET_AUTO_COURSE,
+                payload: branch.data.data
+            });
+           dispatch(returnErrors(branch.data.message, branch.status));
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+
+}
+export const deleteStudent = (id) => (dispatch) => {
 
     axios.delete(`/api/student/${id}`,  )
         .then(groups => {
@@ -81,7 +124,7 @@ export const deleteBranch = (id) => (dispatch) => {
                 payload: groups.data.data
             });
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 }

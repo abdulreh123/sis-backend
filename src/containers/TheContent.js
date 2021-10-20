@@ -4,6 +4,7 @@ import {
   Switch
 } from 'react-router-dom'
 import { CContainer } from '@coreui/react'
+import { useSelector} from 'react-redux'
 // routes config
 import {PrivateRoute} from 'src/routing'
 import { routes } from '../routes'
@@ -13,13 +14,20 @@ const loading = (
   </div>
 )
 const TheContent = (props) => {
+  const status = useSelector(state => state.auth.user?.status)
+  const permitedRoute =routes.map(route=>{
+    if(route.permissions?.includes(status)){
+      return route
+  }
+})
+const allRoutes =permitedRoute.filter(route=>route!==undefined)
  // const routes = props.routes
   return (
     <main className="c-main">
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>
-            {routes.map((route, idx) => {
+            {allRoutes.map((route, idx) => {
               return route.component && (
                 <PrivateRoute
                 {...route}

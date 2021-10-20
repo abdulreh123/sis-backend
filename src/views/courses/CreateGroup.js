@@ -15,14 +15,24 @@ import {
     CSelect,
 } from '@coreui/react'
 import {
-    AddCourse,
+    AddGroup,
+} from "../../actions/groupActions";
+import {
+    fetchCourses,
 } from "../../actions/coursesActions";
+import {
+    fetchAdvisor,
+} from "../../actions/advisorActions";
+import {
+    fetchRooms,
+} from "../../actions/roomActions";
 const Create = () => {
     const [data, setData] = useState({});
     const [department, setDepartment] = useState(0);
     const dispatch = useDispatch();
-    const departments = useSelector((state) => state.department.departments);
-    const courses = useSelector((state) => state.courses.courses);
+    const course = useSelector((state) => state.courses.courses);
+    const advisor = useSelector((state) => state.advisor.advisors);
+    const room = useSelector((state) => state.rooms.rooms);
    
     const handleChange = (e) => {
         const target = e.target;
@@ -36,20 +46,24 @@ const Create = () => {
             [name]: value
         })
     }
-    const pre= courses.filter(course=> course.departmentId==department )
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(AddCourse({ ...data }));
-        document.getElementById("resetCourse").reset()
+        dispatch(AddGroup({ ...data }));
+      //  document.getElementById("resetCourse").reset()
     }
     const reset = (e) => {
         document.getElementById("resetCourse").reset()
     }
+    useEffect(() => {
+        dispatch(fetchCourses());
+        dispatch(fetchRooms());
+        dispatch(fetchAdvisor());
+    }, [dispatch]);
     return (
         <CCol xs="12" md="15">
             <CCard>
                 <CCardHeader>
-                    Create new Course
+                    Create new Group
                 </CCardHeader>
                 <CCardBody>
                     <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" id="resetCourse">
@@ -62,59 +76,80 @@ const Create = () => {
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Code</CLabel>
+                            <CCol md="3">lecturer
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CInput id="number-input" type="text" name="code" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Semester</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="number" name="semester" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">Department
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CSelect custom name="departmentId" id="select" onChange={handleChange}>
+                                <CSelect custom name="lecturerId" id="select" onChange={handleChange}>
                                     <option value="0">Please select</option>
-                                    {departments.map(dep=>
+                                    {advisor?.map(dep=>
+                                    <option value={dep.id}>{dep.name + " " + dep.surname}</option>
+                                        )}
+                                </CSelect>
+                            </CCol>
+                        </CFormGroup>
+                        <CFormGroup row>
+                            <CCol md="3">Day
+                            </CCol>
+                            <CCol xs="12" md="9">
+                                <CSelect custom name="day" id="select" onChange={handleChange}>
+                                    <option value="0">Please select</option>
+                                    <option value="monday">Monday</option>
+                                    <option value="tuesday">Tuesday</option>
+                                    <option value="wednesday">Wednesday</option>
+                                    <option value="thursday">Thursday</option>
+                                    <option value="friday">Friday</option>
+                                    <option value="saturday">Saturday</option>
+                                </CSelect>
+                            </CCol>
+                        </CFormGroup>
+                        <CFormGroup row>
+                            <CCol md="3">
+                                <CLabel htmlFor="number-input">Start</CLabel>
+                            </CCol>
+                            <CCol xs="12" md="9">
+                                <CInput id="number-input" type="time" name="timeStart" onChange={handleChange} />
+                            </CCol>
+                        </CFormGroup>
+                        <CFormGroup row>
+                            <CCol md="3">
+                                <CLabel htmlFor="number-input">End</CLabel>
+                            </CCol>
+                            <CCol xs="12" md="9">
+                                <CInput id="number-input" type="time" name="timeEnd" onChange={handleChange} />
+                            </CCol>
+                        </CFormGroup>  
+                         <CFormGroup row>
+                            <CCol md="3">Room
+                            </CCol>
+                            <CCol xs="12" md="9">
+                                <CSelect custom name="room" id="select" onChange={handleChange}>
+                                    <option value="0">Please select</option>
+                                    {room?.map(dep=>
                                     <option value={dep.id}>{dep.name}</option>
                                         )}
                                 </CSelect>
                             </CCol>
                         </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">Prerequisites
+                         <CFormGroup row>
+                            <CCol md="3">Course
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CSelect custom name="prerequisites" id="select" onChange={handleChange}>
+                                <CSelect custom name="courseId" id="select" onChange={handleChange}>
                                     <option value="0">Please select</option>
-                                    {pre.map(dep=>
-                                    <option value={dep.code}>{dep.name}</option>
+                                    {course?.map(dep=>
+                                    <option value={dep.id}>{dep.name}</option>
                                         )}
                                 </CSelect>
                             </CCol>
                         </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Credit</CLabel>
+                         <CFormGroup row>
+                            <CCol md="3">Academic Year
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CInput id="number-input" type="number" name="credit" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">ECT5</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="number" name="ECT5" onChange={handleChange} />
+                                <CSelect custom name="year" id="select" onChange={handleChange}>
+                                    <option value="0">Please select</option>
+                                    <option value="2020-2021 - Spring">2021 -Fall</option>
+                                </CSelect>
                             </CCol>
                         </CFormGroup>
                     </CForm>

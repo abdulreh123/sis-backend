@@ -1,9 +1,9 @@
 import React,{useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
-import {
-    CImg
-  } from '@coreui/react'
+  const IMG = styled.img`
+  width:47%;
+  `
 const Profile = () => {
     const user = useSelector((state) => state.auth.user);
   return (
@@ -13,7 +13,7 @@ const Profile = () => {
       <div class="col-lg-4">
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-              <CImg
+              <IMG
             src={'avatars/6.jpg'}
             className="c-avatar-img"
             alt="admin@bootstrapmaster.com"
@@ -22,8 +22,8 @@ const Profile = () => {
           </div>
           <div class="card-body">
             <p class="mb-0"><strong class="pr-1">Student ID:</strong>{user?.userId}</p>
-            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+            <p class="mb-0"><strong class="pr-1">Department:</strong>4</p>
+            <p class="mb-0"><strong class="pr-1">Advisor:</strong>A</p>
           </div>
         </div>
       </div>
