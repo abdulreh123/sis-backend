@@ -1,12 +1,14 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import AddCourse from './AddCourse'
 import AutoCourse from './AutoCourse'
 import styled from 'styled-components';
- import {
+import AllPayment from './payments'
+import { Link } from 'react-router-dom'
+import {
     getStudent, getTranscript
 } from "../../actions/studentsActions";
- import {
+import {
     getGroupDepartment
 } from "../../actions/groupActions";
 import {
@@ -41,6 +43,9 @@ const DataTable = styled(Card)`
 `;
 const Button = styled(CButton)`
 margin-right: 1rem;
+`;
+const Payment = styled(CButton)`
+margin-left: 1rem;
 `;
 const Cell = styled.div`
     border: 0.5px solid #E6E9ED;
@@ -137,15 +142,17 @@ const StudentProfile = (props) => {
                             </div>
                         </div>
                         <div>
-                        <Button color="primary" onClick={()=>setModal(!modal)}>
-                            Add courses
-                        </Button>
-                        <CButton color="primary" onClick={()=>setAutoModal(!autoModal)}>
-                            Automate Selection
-                        </CButton></div>
+                            <Button color="primary" onClick={() => setModal(!modal)}>
+                                Add courses
+                            </Button>
+                            <CButton color="primary" onClick={() => setAutoModal(!autoModal)}>
+                                Automate Selection
+                            </CButton></div>
                     </div>
                 </div>
             </div>
+             Payments
+            <AllPayment studentId={user?.userId} />
             <BranchWrapper>
                 {courses?.map((course, index) =>
                     <div margin="2rem" key={index} >
@@ -178,9 +185,9 @@ const StudentProfile = (props) => {
                     </div>
                 )}
             </BranchWrapper>
-            
-            <AddCourse modal={modal} setModal ={setModal} studentId={student}/>
-            <AutoCourse modal={autoModal} setModal ={setAutoModal} studentId={student}/>
+
+            <AddCourse modal={modal} setModal={setModal} studentId={student} />
+            <AutoCourse modal={autoModal} setModal={setAutoModal} studentId={student} />
         </div>
     )
 }

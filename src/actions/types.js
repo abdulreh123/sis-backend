@@ -39,3 +39,6 @@ export const ADD_BUILDINGS = "ADD_BUILDINGS";
 
 export const GET_ROOMS = "GET_ROOMS";
 export const ADD_ROOM = "ADD_ROOM";
+
+export const GET_PAYMENT = "GET_PAYMENT";
+export const ADD_PAYMENT = "ADD_PAYMENT";

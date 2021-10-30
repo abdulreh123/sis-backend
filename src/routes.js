@@ -27,19 +27,7 @@ export const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
-    permissions:['Student',"SuperAdmin"]
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: ChairmanDashboard,
-    permissions:['Chairman']
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: AdvisorDashboard,
-    permissions:['Advisor']
+    permissions:['Student',"SuperAdmin","Chairman","Advisor"]
   },
   {
     path: '/student',

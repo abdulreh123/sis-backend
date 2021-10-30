@@ -83,6 +83,21 @@ const _nav =  [
       },
       {
         _tag: 'CSidebarNavItem',
+        name: 'Transcript',
+        to: '/my-courses',
+        permissions:['Student',"SuperAdmin"]
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Groups',
+    route: '/groups',
+    icon: 'cil-book',
+    permissions:['Chairman',"SuperAdmin"],
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
         name: 'Course group',
         to: '/groups',
         permissions:['Chairman',"SuperAdmin"]
@@ -92,12 +107,6 @@ const _nav =  [
         name: 'Create group',
         to: '/create-groups',
         permissions:['Chairman',"SuperAdmin"]
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Transcript',
-        to: '/my-courses',
-        permissions:['Student',"SuperAdmin"]
       },
     ],
   },

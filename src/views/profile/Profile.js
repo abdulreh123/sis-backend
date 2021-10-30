@@ -1,11 +1,21 @@
-import React,{useEffect} from 'react'
+import React, { useState } from 'react'
+import {
+  CButton,
+} from '@coreui/react'
+import Payment from './Addpayment'
+import AllPayment from './payments'
 import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
   const IMG = styled.img`
   width:47%;
   `
+  
+const Button = styled(CButton)`
+margin-left: 1rem;
+`;
 const Profile = () => {
     const user = useSelector((state) => state.auth.user);
+    const [paymentmodal, setPaymentModal] = useState(false)
   return (
    <div class="student-profile py-4">
   <div class="container">
@@ -29,10 +39,15 @@ const Profile = () => {
       </div>
       <div class="col-lg-8">
         <div class="card shadow-sm">
+          
           <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information 
+        <Button color="primary" onClick={() => setPaymentModal(!paymentmodal)}>
+                            Add payment
+                        </Button></h3>
           </div>
           <div class="card-body pt-0">
+            
             <table class="table table-bordered">
               <tr>
                 <th width="30%">Roll</th>
@@ -65,6 +80,9 @@ const Profile = () => {
       </div>
     </div>
   </div>
+  <Payment modal={paymentmodal} setModal={setPaymentModal} studentId={user?.userId}/>
+  My Payments
+  <AllPayment studentId={user?.userId}/>
 </div>
   )
 }

@@ -8,6 +8,7 @@ import groupReducer from './groupReducer'
 import buildingReducer from './BuildingReducer'
 import advisorReducer from './advisorReducer'
 import roomReducer from './RoomReducer'
+import paymentReducer from './paymentReducer'
 export default combineReducers({
     auth:authReducer,
     student: studentReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
     group:groupReducer,
     errors:errorReducer,
     building:buildingReducer,
-    rooms:roomReducer
+    rooms:roomReducer,
+    payments:paymentReducer
 });
