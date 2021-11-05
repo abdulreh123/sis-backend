@@ -4,15 +4,19 @@ import {
     GET__ADVISOR_STUDENTS,
     GET_STUDENT,
     GET_TRANSCRIPT,
-    GET_AUTO_COURSE
+    GET_AUTO_COURSE,
+    COURSES_TO_APPROVE,
+    COURSE_APPROVED
 } from '../actions/types';
 
 const initialState = {
     students: [],
     advisor: [],
-    autoCourse:[],
+    autoCourse: [],
     student: {},
-    studentCourse:[]
+    studentCourse: [],
+    coursesToApprove: [],
+    approveMessage: {}
 }
 
 export default (state = initialState, action) => {
@@ -43,6 +47,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 studentCourse: action.payload
+            }
+        case COURSES_TO_APPROVE:
+            return {
+                ...state,
+                coursesToApprove: action.payload
+            }
+        case COURSE_APPROVED:
+            return {
+                ...state,
+                approveMessage: action.payload
             }
         // case GET_BRANCH:
         // case UPDATE_BRANCH:

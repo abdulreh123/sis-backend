@@ -11,6 +11,11 @@ import CIcon from '@coreui/icons-react'
 import {
   getCurrentUser
 } from "../actions/authActions";
+import {
+  ShowSidebar,
+  HideSidebar,
+  ResponsoneSidebar
+} from "../actions/sidebarActions";
 
 import { 
   TheHeaderDropdown,
@@ -21,16 +26,16 @@ import {
 
 const TheHeader = () => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector(state => state.sidebarShow)
+  const sidebarShow = useSelector(state => state.sidebar.show)
 
   const toggleSidebar = () => {
-    const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
+    [true, 'responsive'].includes(sidebarShow) ?
+    dispatch(HideSidebar()) : dispatch(ResponsoneSidebar())
   }
 
   const toggleSidebarMobile = () => {
-    const val = [false, 'responsive'].includes(sidebarShow) ? true : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
+    [false, 'responsive'].includes(sidebarShow) ?
+    dispatch(ShowSidebar()) : dispatch(ResponsoneSidebar())
   }
   useEffect(() => {
       dispatch(getCurrentUser());

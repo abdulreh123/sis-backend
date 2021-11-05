@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import AddCourse from './AddCourse'
 import AutoCourse from './AutoCourse'
+import CourseApproval from './CourseApproval'
 import styled from 'styled-components';
 import AllPayment from './payments'
 import { Link } from 'react-router-dom'
@@ -73,6 +74,7 @@ const StudentProfile = (props) => {
     const student = props.match.params.id
     const user = useSelector((state) => state.student.student);
     const courses = useSelector((state) => state.student.studentCourse);
+    const aprooved = useSelector((state) => state.student.approveMessage);
     const [modal, setModal] = useState(false)
     const [autoModal, setAutoModal] = useState(false)
     const dispatch = useDispatch()
@@ -83,7 +85,7 @@ const StudentProfile = (props) => {
     useEffect(() => {
         dispatch(getTranscript(user?.userId));
         dispatch(getGroupDepartment(user?.advisor?.departmentId));
-    }, [dispatch, user]);
+    }, [dispatch, user,aprooved]);
     return (
         <div class="student-profile py-4">
             <div class="container">
@@ -151,8 +153,10 @@ const StudentProfile = (props) => {
                     </div>
                 </div>
             </div>
-             Payments
+            <h4> Payments</h4>
             <AllPayment studentId={user?.userId} />
+            <h4> Awaiting Approval</h4>
+            <CourseApproval studentId={user?.userId} />
             <BranchWrapper>
                 {courses?.map((course, index) =>
                     <div margin="2rem" key={index} >
@@ -168,13 +172,13 @@ const StudentProfile = (props) => {
                             <CellHead>CrPts</CellHead>
                             {course?.courses?.map((log, index) =>
                                 <React.Fragment key={index} >
-                                    {log.studentsCourses.academicYear === course.year ?
+                                    {log.studentscourses.academicYear === course.year ?
                                         <>
                                             <Cell>{log.Course.code}</Cell>
                                             <Cell>{log.Course.name}</Cell>
                                             <Cell>{log.Course.credit}</Cell>
-                                            <Cell>{log.studentsCourses?.grade}</Cell>
-                                            <Cell>{log.studentsCourses?.CrPts}</Cell> </> : null}
+                                            <Cell>{log.studentscourses?.grade}</Cell>
+                                            <Cell>{log.studentscourses?.CrPts}</Cell> </> : null}
 
                                 </React.Fragment>
 
