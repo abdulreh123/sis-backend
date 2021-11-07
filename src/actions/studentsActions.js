@@ -7,7 +7,9 @@ import {
     GET_TRANSCRIPT,
     GET_STUDENT,
     COURSES_TO_APPROVE,
-    COURSE_APPROVED
+    COURSE_APPROVED,
+    GET_STUDENT_STATS,
+    GET_TIMETABLE
 } from './types';
 import axios from 'axios';
 //import Cookies from 'js-cookie';
@@ -30,6 +32,30 @@ export const getStudent = (id) => dispatch => {
         .then(branch => {
             dispatch({
                 type: GET_STUDENT,
+                payload: branch.data.data
+            });
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+}
+export const getTimeTable = (id) => dispatch => {
+    axios.get(`/api/student/time-table/${id}?year=2021-2022 - Spring`,  )
+        .then(branch => {
+            dispatch({
+                type: GET_TIMETABLE,
+                payload: branch.data.data
+            });
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+}
+export const getStudentStats = (id,departmentId) => dispatch => {
+    axios.get(`/api/student/stats/${id}/${departmentId}`,  )
+        .then(branch => {
+            dispatch({
+                type: GET_STUDENT_STATS,
                 payload: branch.data.data
             });
         })

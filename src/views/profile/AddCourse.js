@@ -79,9 +79,9 @@ const Modals = (props) => {
                                     <MultiSelectLabel>Acadamic Year :</MultiSelectLabel>
                                         <CSelect custom name="select" id="select" onChange={handleChange}>
                                             <option value="0">Please select</option>
-                                            <option value="2020-2021 - Fall">2020-2021 - Fall</option>
-                                            <option value="2020-2021 - Spring">2020-2021 - Spring</option>
-                                            <option value="2020-2021 - Summer">2020-2021 - Summer</option>
+                                            <option value="2021-2022 - Fall">2021-2022 - Fall</option>
+                                            <option value="2021-2022 - Spring">2021-2022 - Spring</option>
+                                            <option value="2021-2022 - Summer">2021-2022 - Summer</option>
                                         </CSelect>
                                     <MultiSelectLabel>Courses :</MultiSelectLabel>
                                     <MultiselectCosutm

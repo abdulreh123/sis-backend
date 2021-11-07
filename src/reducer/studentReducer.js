@@ -6,16 +6,20 @@ import {
     GET_TRANSCRIPT,
     GET_AUTO_COURSE,
     COURSES_TO_APPROVE,
-    COURSE_APPROVED
+    COURSE_APPROVED,
+    GET_STUDENT_STATS,
+    GET_TIMETABLE
 } from '../actions/types';
 
 const initialState = {
     students: [],
     advisor: [],
+    stats:{},
     autoCourse: [],
     student: {},
     studentCourse: [],
     coursesToApprove: [],
+    timeTable: [],
     approveMessage: {}
 }
 
@@ -58,35 +62,17 @@ export default (state = initialState, action) => {
                 ...state,
                 approveMessage: action.payload
             }
-        // case GET_BRANCH:
-        // case UPDATE_BRANCH:
-        //     return {
-        //         ...state,
-        //         branch: action.payload,
-        //         error: null
-        //     }
-        //     case ADD_BRANCH:
-        //         return {
-        //             ...state,
-        //             branch: action.payload,
-        //             error: null
-        //         }
-        //     case DELETE_BRANCH:
-        //     return {
-        //         ...state,
-        //         branch: action.payload,
-        //         error: null
-        //     }
-        // case GET_HOLIDAY:
-        //     return {
-        //         ...state,
-        //         holiday: action.payload
-        //     }
-        // case BRANCH_ERROR:
-        //     return {
-        //         ...state,
-        //         error: action.payload.error
-        //     }
+        case GET_STUDENT_STATS:
+            return {
+                ...state,
+                stats: action.payload
+            }
+        case GET_TIMETABLE:
+            return {
+                ...state,
+                timeTable: action.payload
+            }
+        
         default:
             return state;
     }
