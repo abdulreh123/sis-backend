@@ -104,6 +104,7 @@ const Modals = (props) => {
                                             <option value="2021-2022 - Fall">2021-2022 - Fall</option>
                                             <option value="2021-2022 - Spring">2021-2022 - Spring</option>
                                             <option value="2021-2022 - Summer">2021-2022 - Summer</option>
+                                            <option value="2022-2023 - Fall">2022-2023 - Fall</option>
                                     </CSelect>
                                 </CFormGroup>
                             </CForm>

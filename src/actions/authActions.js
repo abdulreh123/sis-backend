@@ -43,6 +43,9 @@ export const getCurrentUser = () => (dispatch) => {
       });
     })
     .catch((error) => { 
+      dispatch({
+        type: LOGOUT_SUCCESS,
+      });
      dispatch(returnErrors(error.response.data.message, error.response.status));
     });
 };

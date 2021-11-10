@@ -8,7 +8,7 @@ const AllCourses = () => {
     const courses = useSelector((state) => state.courses.courses);
     const course = useSelector((state) => state.courses.course);
     const user = useSelector((state) => state.auth.user);
-    const StudentDepartment =courses.filter(course=>course.departmentId===user.department.id)
+    const StudentDepartment =courses.filter(course=>course.departmentId===user?.department.id || course.departmentId===4)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchCourses());
