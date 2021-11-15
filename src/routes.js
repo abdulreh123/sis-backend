@@ -7,10 +7,10 @@ const Register = React.lazy(() => import('./views/students/Register'));
 const CreateDepartment = React.lazy(() => import('./views/departments/Create'));
 const Department = React.lazy(() => import('./views/departments/AllDepartments'));
 const Courses = React.lazy(() => import('./views/courses/AllCourses'));
+const AllAdvisors = React.lazy(() => import('./views/advisor/AllAdvisors'));
+const Advisors = React.lazy(() => import('./views/advisor/Advisor'));
 const CreateCourses = React.lazy(() => import('./views/courses/Create'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
-const ChairmanDashboard = React.lazy(() => import('./views/dashboard/ChairmanDashboard'));
-const AdvisorDashboard = React.lazy(() => import('./views/dashboard/AdvisorDashboard'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const Groups = React.lazy(() => import('./views/courses/Groups'));
 const CreateGroups = React.lazy(() => import('./views/courses/CreateGroup'));
@@ -130,6 +130,20 @@ export const routes = [
     name: 'Student profile',
     component: StudentProfile,
     permissions:['Advisor','Chairman',"SuperAdmin"]
-  }
+  },
+  {
+    path: '/all-advisors',
+    exact: true,
+    name: 'All Advisors',
+    component: AllAdvisors,
+    permissions:['SuperAdmin']
+  },
+  {
+    path: '/advisors',
+    exact: true,
+    name: 'Advisors',
+    component: Advisors,
+    permissions:['Chairman']
+  },
 ];
 

@@ -112,6 +112,27 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavDropdown',
+    name: 'Advisors',
+    route: '/advisor',
+    icon: 'cil-book',
+    permissions:['Chairman',"SuperAdmin"],
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'All Advisors',
+        to: '/All-Advisors',
+        permissions:["SuperAdmin"]
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Advisors',
+        to: '/advisors',
+        permissions:['Chairman']
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
     name: 'Buildings',
     route: '/buildings',
     icon: 'cil-book',
