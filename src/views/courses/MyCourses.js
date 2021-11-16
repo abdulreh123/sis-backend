@@ -72,13 +72,13 @@ const StudentCourses = () => {
                 <CellHead>CrPts</CellHead>
                 {course?.courses?.map((log, index) =>
                     <React.Fragment key={index} >
-                        {log.studentsCourses.academicYear=== course.year?
+                        {log.studentscourses.academicYear=== course.year?
                             <>
                             <Cell>{log.Course.code}</Cell>
                                 <Cell>{log.Course.name}</Cell>
                                 <Cell>{log.Course.credit}</Cell>
-                                <Cell>{log.studentsCourses?.grade}</Cell>
-                                <Cell>{log.studentsCourses?.CrPts}</Cell> </> :null}
+                                <Cell>{log.studentscourses?.grade}</Cell>
+                                <Cell>{log.studentscourses?.CrPts}</Cell> </> :null}
 
                     </React.Fragment>
 

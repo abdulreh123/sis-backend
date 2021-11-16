@@ -5,7 +5,11 @@ import {
     ADD_STUDENT,
     GET_AUTO_COURSE,
     GET_TRANSCRIPT,
-    GET_STUDENT
+    GET_STUDENT,
+    COURSES_TO_APPROVE,
+    COURSE_APPROVED,
+    GET_STUDENT_STATS,
+    GET_TIMETABLE
 } from './types';
 import axios from 'axios';
 //import Cookies from 'js-cookie';
@@ -28,6 +32,30 @@ export const getStudent = (id) => dispatch => {
         .then(branch => {
             dispatch({
                 type: GET_STUDENT,
+                payload: branch.data.data
+            });
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+}
+export const getTimeTable = (id) => dispatch => {
+    axios.get(`/api/student/time-table/${id}?year=2021-2022 - Spring`,  )
+        .then(branch => {
+            dispatch({
+                type: GET_TIMETABLE,
+                payload: branch.data.data
+            });
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+}
+export const getStudentStats = (id,departmentId) => dispatch => {
+    axios.get(`/api/student/stats/${id}/${departmentId}`,  )
+        .then(branch => {
+            dispatch({
+                type: GET_STUDENT_STATS,
                 payload: branch.data.data
             });
         })
@@ -106,6 +134,34 @@ export const automate = (id, year) => (dispatch) => {
         .then(branch => {
             dispatch({
                 type: GET_AUTO_COURSE,
+                payload: branch.data.data
+            });
+           dispatch(returnErrors(branch.data.message, branch.status));
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+
+}
+export const CoursesApproval = (id) => (dispatch) => {
+    axios.get(`/api/student/get-approve/${id}`, )
+        .then(branch => {
+            dispatch({
+                type: COURSES_TO_APPROVE,
+                payload: branch.data.data
+            });
+           dispatch(returnErrors(branch.data.message, branch.status));
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+
+}
+export const Approval = (studentId,courseId) => (dispatch) => {
+    axios.put(`/api/student//approve/${studentId}/${courseId}`, )
+        .then(branch => {
+            dispatch({
+                type: COURSE_APPROVED,
                 payload: branch.data.data
             });
            dispatch(returnErrors(branch.data.message, branch.status));

@@ -9,6 +9,7 @@ import buildingReducer from './BuildingReducer'
 import advisorReducer from './advisorReducer'
 import roomReducer from './RoomReducer'
 import paymentReducer from './paymentReducer'
+import sidebarReducer from './sidebarReducer'
 export default combineReducers({
     auth:authReducer,
     student: studentReducer,
@@ -19,5 +20,6 @@ export default combineReducers({
     errors:errorReducer,
     building:buildingReducer,
     rooms:roomReducer,
-    payments:paymentReducer
+    payments:paymentReducer,
+    sidebar:sidebarReducer
 });

@@ -4,15 +4,23 @@ import {
     GET__ADVISOR_STUDENTS,
     GET_STUDENT,
     GET_TRANSCRIPT,
-    GET_AUTO_COURSE
+    GET_AUTO_COURSE,
+    COURSES_TO_APPROVE,
+    COURSE_APPROVED,
+    GET_STUDENT_STATS,
+    GET_TIMETABLE
 } from '../actions/types';
 
 const initialState = {
     students: [],
     advisor: [],
-    autoCourse:[],
+    stats:{},
+    autoCourse: [],
     student: {},
-    studentCourse:[]
+    studentCourse: [],
+    coursesToApprove: [],
+    timeTable: [],
+    approveMessage: {}
 }
 
 export default (state = initialState, action) => {
@@ -44,35 +52,27 @@ export default (state = initialState, action) => {
                 ...state,
                 studentCourse: action.payload
             }
-        // case GET_BRANCH:
-        // case UPDATE_BRANCH:
-        //     return {
-        //         ...state,
-        //         branch: action.payload,
-        //         error: null
-        //     }
-        //     case ADD_BRANCH:
-        //         return {
-        //             ...state,
-        //             branch: action.payload,
-        //             error: null
-        //         }
-        //     case DELETE_BRANCH:
-        //     return {
-        //         ...state,
-        //         branch: action.payload,
-        //         error: null
-        //     }
-        // case GET_HOLIDAY:
-        //     return {
-        //         ...state,
-        //         holiday: action.payload
-        //     }
-        // case BRANCH_ERROR:
-        //     return {
-        //         ...state,
-        //         error: action.payload.error
-        //     }
+        case COURSES_TO_APPROVE:
+            return {
+                ...state,
+                coursesToApprove: action.payload
+            }
+        case COURSE_APPROVED:
+            return {
+                ...state,
+                approveMessage: action.payload
+            }
+        case GET_STUDENT_STATS:
+            return {
+                ...state,
+                stats: action.payload
+            }
+        case GET_TIMETABLE:
+            return {
+                ...state,
+                timeTable: action.payload
+            }
+        
         default:
             return state;
     }

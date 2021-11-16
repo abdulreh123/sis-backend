@@ -13,12 +13,17 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
+import {
+  ShowSidebar,
+  HideSidebar,
+  ResponsoneSidebar
+} from "../actions/sidebarActions";
 // sidebar nav config
 import navigation from './_nav'
 
 const TheSidebar = () => {
   const dispatch = useDispatch()
-  const show = useSelector(state => state.sidebarShow)
+  const show = useSelector(state => state.sidebar.show)
   const status = useSelector(state => state.auth.user?.status)
   const permitedNav =navigation.map(nav=>{
     let navs
@@ -53,7 +58,7 @@ const TheSidebar = () => {
   return (
     <CSidebar
       show={show}
-      onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
+      onShowChange={(val) => dispatch(HideSidebar())}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
         <CIcon

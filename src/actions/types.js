@@ -7,9 +7,13 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const GET_STUDENTS = "GET_STUDENTS";
 export const ADD_STUDENT = "ADD_STUDENT";
 export const GET_STUDENT = "GET_STUDENT";
+export const GET_STUDENT_STATS = "GET_STUDENT_STATS";
+export const GET_TIMETABLE = "GET_TIMETABLE";
 export const GET_TRANSCRIPT = "GET_TRANSCRIPT";
 export const GET__ADVISOR_STUDENTS = "GET__ADVISOR_STUDENTS";
 export const GET_AUTO_COURSE = "GET_AUTO_COURSE";
+export const COURSES_TO_APPROVE = "COURSES_TO_APPROVE";
+export const COURSE_APPROVED = "COURSE_APPROVED";
 
 export const GET_DEPARMENTS = "GET_DEPARMENTS";
 export const ADD_DEPARTMENT = "ADD_DEPARTMENT";
@@ -42,3 +46,8 @@ export const ADD_ROOM = "ADD_ROOM";
 
 export const GET_PAYMENT = "GET_PAYMENT";
 export const ADD_PAYMENT = "ADD_PAYMENT";
+
+
+export const SHOW_SIDEBAR = "SHOW_SIDEBAR";
+export const HIDE_SIDEBAR = "HIDE_SIDEBAR";
+export const RES_SIDEBAR = "RES_SIDEBAR";

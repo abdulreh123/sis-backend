@@ -2,42 +2,35 @@ import React,{useEffect} from 'react'
 import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  fetchCourses
-} from "../../actions/coursesActions";
-const AllCourses = () => {
-    const courses = useSelector((state) => state.courses.courses);
-    const course = useSelector((state) => state.courses.course);
-    const user = useSelector((state) => state.auth.user);
-    const StudentDepartment =courses.filter(course=>course.departmentId===user.department.id)
+    CoursesApproval,Approval
+} from "../../actions/studentsActions";
+const ApproveCourses = (props) => {
+    const studentId = props.studentId
+    const courses = useSelector((state) => state.student.coursesToApprove);
+    const aprooved = useSelector((state) => state.student.approveMessage);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchCourses());
-    }, [dispatch,course]);
+        dispatch(CoursesApproval(studentId));
+    }, [dispatch,aprooved,studentId]);
 
     let columns = [
         {
           selector: "name",
           name: "Name",
-          sortable: true,},
+          sortable: true,
+          cell: row => (<span >{row.Course.name}</span>)
+        },
         {
           selector: "code",
           name: "Code",
-          sortable: true
-        },
-        {
-          selector: "semester",
-          name: "Semester",
-          sortable: true
+          sortable: true,
+          cell: row => (<span >{row.Course.code}</span>)
         },
         {
           selector: "credit",
           name: "Credit",
-          sortable: true
-        },
-        {
-          selector: "ECT5",
-          name: "ECT5",
-          sortable: true
+          sortable: true,
+          cell: row => (<span >{row.Course.credit}</span>)
         },
         {
           name: "Actions",
@@ -45,12 +38,11 @@ const AllCourses = () => {
             <div className="table-icon">
               <span
               style={{margin: '1rem'}}
-                // onClick={() => {
-                //   toggleEditModal(!editModal);
-                //   getDepartmentData(row.id);
-                // }}
+                onClick={() => {
+                    dispatch(Approval(row.studentscourses.studentId,row.studentscourses.courseGroupId))
+                }}
               >
-                  Edit
+                  Approve
               </span>
               <span >
                   Delete
@@ -66,7 +58,7 @@ const AllCourses = () => {
     
     <DataTable
             columns={columns}
-            data={StudentDepartment ? StudentDepartment : []}
+            data={courses ? courses : []}
             striped={true}
             responsive={true}
             pagination={true}
@@ -78,4 +70,4 @@ const AllCourses = () => {
   )
 }
 
-export default AllCourses
+export default ApproveCourses
