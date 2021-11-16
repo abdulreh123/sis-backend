@@ -9,7 +9,8 @@ import {
     COURSES_TO_APPROVE,
     COURSE_APPROVED,
     GET_STUDENT_STATS,
-    GET_TIMETABLE
+    GET_TIMETABLE,
+    GET_CHAIRMAN_STATS
 } from './types';
 import axios from 'axios';
 //import Cookies from 'js-cookie';
@@ -20,6 +21,18 @@ export const fetchStudents = () => dispatch => {
         .then(api => {
             dispatch({
                 type: GET_STUDENTS,
+                payload: api.data.data
+            });
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+}
+export const getChairmanStat = (id) => dispatch => {
+    axios.get(`/api/chairman/statistics/${id}`,  )
+        .then(api => {
+            dispatch({
+                type: GET_CHAIRMAN_STATS,
                 payload: api.data.data
             });
         })
