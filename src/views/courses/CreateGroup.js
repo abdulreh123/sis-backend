@@ -87,49 +87,6 @@ const Create = () => {
                                 </CSelect>
                             </CCol>
                         </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">Day
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CSelect custom name="day" id="select" onChange={handleChange}>
-                                    <option value="0">Please select</option>
-                                    <option value="monday">Monday</option>
-                                    <option value="tuesday">Tuesday</option>
-                                    <option value="wednesday">Wednesday</option>
-                                    <option value="thursday">Thursday</option>
-                                    <option value="friday">Friday</option>
-                                    <option value="saturday">Saturday</option>
-                                </CSelect>
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Start</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="time" name="timeStart" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">End</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="time" name="timeEnd" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>  
-                         <CFormGroup row>
-                            <CCol md="3">Room
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CSelect custom name="room" id="select" onChange={handleChange}>
-                                    <option value="0">Please select</option>
-                                    {room?.map(dep=>
-                                    <option value={dep.id}>{dep.name}</option>
-                                        )}
-                                </CSelect>
-                            </CCol>
-                        </CFormGroup>
                          <CFormGroup row>
                             <CCol md="3">Course
                             </CCol>
@@ -148,7 +105,8 @@ const Create = () => {
                             <CCol xs="12" md="9">
                                 <CSelect custom name="year" id="select" onChange={handleChange}>
                                     <option value="0">Please select</option>
-                                    <option value="2020-2021 - Spring">2021 -Fall</option>
+                                    <option value="2021-2022 - Spring">2021-2022 - Spring</option>
+                                    <option value="2022-2023 - Fall">2022-2023 - Fall</option>
                                 </CSelect>
                             </CCol>
                         </CFormGroup>

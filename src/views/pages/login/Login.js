@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import {
   CButton,
@@ -19,9 +20,9 @@ import CIcon from '@coreui/icons-react'
 import {
   userLogin,
 } from "../../../actions/authActions";
-import Cookies from 'js-cookie';;
+import Cookies from 'js-cookie';
 const checkLogin = () => {
-    return Cookies.get('__SOSAR_AUTH') ? true : false;
+  return Cookies.get('__SOSAR_AUTH') ? true : false;
 }
 
 const Login = () => {
@@ -50,19 +51,25 @@ const Login = () => {
     e.preventDefault();
     document.getElementById("resetLogin").reset()
   }
-  if(checkLogin()===true && user){
+  if (checkLogin() === true && user) {
     history.push(`/dashboard`)
   }
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
+        <div style={{textAlign: "center",marginBottom:"1rem"}}>
+          <CIcon
+            className="c-sidebar-brand-minimized"
+            name="sygnet"
+            src="https://neu.edu.tr/wp-content/uploads/2018/11/01/neu-42-years-in-education.png"
+            height={100}
+          /></div>
         <CRow className="justify-content-center">
           <CCol md="6">
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
                   <CForm id="resetLogin">
-                    <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>

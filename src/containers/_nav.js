@@ -43,22 +43,43 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavDropdown',
+    name: 'Advisors',
+    route: '/advisor',
+    icon: 'cil-book',
+    permissions:['Chairman',"SuperAdmin"],
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'All Advisors',
+        to: '/All-Advisors',
+        permissions:["SuperAdmin"]
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Advisors',
+        to: '/advisors',
+        permissions:['Chairman']
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
     name: 'Departments',
     route: '/departments',
     icon: 'cil-building',
-    permissions:['Chairman',"SuperAdmin"],
+    permissions:["SuperAdmin"],
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Departments',
         to: '/departments',
-        permissions:['Chairman',"SuperAdmin"]
+        permissions:["SuperAdmin"]
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Create Department',
         to: '/createDepartment',
-        permissions:['Chairman',"SuperAdmin"]
+        permissions:["SuperAdmin"]
       },
     ],
   },

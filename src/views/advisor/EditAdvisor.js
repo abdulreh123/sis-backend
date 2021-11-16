@@ -1,36 +1,29 @@
-import React, {useState,useEffect } from 'react'
-import CIcon from '@coreui/icons-react'
-import { useDispatch,useSelector } from "react-redux";
+import React, { useState } from 'react'
 import {
-    fetchAdvisor,
-} from "../../actions/advisorActions";
-import {
-    CButton,
-    CCard,
-    CCardBody,
-    CCardFooter,
-    CCardHeader,
-    CCol,
-    CForm,
-    CFormGroup,
-    CInput,
-    CLabel,
-    CSelect,
+  CButton,
+  CCardBody,
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalHeader,
+  CModalTitle,
+  CRow,
+  CCol,
+  CForm,
+  CFormGroup,
+  CInput,
+  CLabel,
+  CSelect,
 } from '@coreui/react'
-import {
-    AddStudents,
-} from "../../actions/studentsActions";
-const Register = () => {
+
+const Modals = (props) => {
     const [data, setData] = useState({});
     const [user, setUser] = useState({});
-    const advisor = useSelector((state) => state.advisor.advisors);
-    const dispatch = useDispatch();
-
     const handleChange = (e) => {
         const target = e.target;
         const value = target.value;
         const name = target.name;
-        if(name==='userId'||"advisorId"){
+        if(name==='userId'){
             setData({
                 ...data,
                 [name]: parseInt(value)
@@ -41,7 +34,6 @@ const Register = () => {
             [name]: value
         })
     }
-    console.log(data)
     const handleUser = (e) => {
         const target = e.target;
         const value = target.value;
@@ -51,30 +43,31 @@ const Register = () => {
             [name]: value
         })
     }
-    const handleSubmit = (e) => {
-        const create = {
-            userId: data.userId,
-            name: data.name,
-            surname: data.surname,
-            passportNumber: data.passportNumber,
-            nationality: data.nationality,
-            advisorId: data.advisorId,
-            user: user
-        }
-        e.preventDefault();
-        dispatch(AddStudents({ ...create }));
-        document.getElementById("resetStudent").reset()
-    }
-    useEffect(() => {
-        dispatch(fetchAdvisor());
-    }, [dispatch]);
-    return (
-        <CCol xs="12" md="15">
-            <CCard>
-                <CCardHeader>
-                    Register new student
-                </CCardHeader>
-                <CCardBody>
+    // const handleSubmit = (e) => {
+    //     const create = {
+    //         userId: data.userId,
+    //         name: data.name,
+    //         surname: data.surname,
+    //         advisorId: data.advisorId,
+    //         user: user
+    //     }
+    //     e.preventDefault();
+    //     dispatch(AddStudents({ ...create }));
+    //     document.getElementById("resetStudent").reset()
+    // }
+  return (
+    <CRow>
+          <CCardBody>
+              <CModal 
+              show={props.modal} 
+              onClose={() => props.setModal(!props.modal)}
+              color="primary"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Edit Student</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CCardBody>
                     <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" id="resetStudent">
                         <CFormGroup row>
                             <CCol md="3">
@@ -98,22 +91,6 @@ const Register = () => {
                             </CCol>
                             <CCol xs="12" md="9">
                                 <CInput id="number-input" type="text" name="surname" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Passport Number</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="text" name="passportNumber" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Nationality</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="text" name="nationality" onChange={handleChange} />
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>
@@ -154,23 +131,29 @@ const Register = () => {
                                 <CLabel htmlFor="select">Select</CLabel>
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CSelect custom name="advisorId" id="select">
-                                    <option value="0">Please select</option>{advisor?.map(dep=>
-                                    <option value={dep.id}>{dep.name + " " + dep.surname}</option>
-                                        )}
+                                <CSelect custom name="select" id="select">
+                                    <option value="0">Please select</option>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
                                 </CSelect>
                             </CCol>
                         </CFormGroup>
                     </CForm>
                 </CCardBody>
-                <CCardFooter>
-                    <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" onClick={handleSubmit} /> Submit</CButton>
-                    <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
-                </CCardFooter>
-            </CCard>
-        </CCol>
-    )
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="primary" onClick={() => props.setModal(!props.modal)}>
+                  Save changes
+                </CButton>{' '}
+                <CButton color="secondary" onClick={() =>  props.setModal(!props.modal)}>
+                  Cancel
+                </CButton>
+              </CModalFooter>
+            </CModal>
+          </CCardBody>
+    </CRow>
+  )
 }
 
-export default Register
-
+export default Modals
