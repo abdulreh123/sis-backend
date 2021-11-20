@@ -25,17 +25,6 @@ const WidgetsDropdown = () => {
                         color="gradient-primary"
                         header={group.name}
                         text="students:12"
-                        footerSlot={
-                            <ChartLineSimple
-                                pointed
-                                className="c-chart-wrapper mt-3 mx-3"
-                                style={{ height: '70px' }}
-                                dataPoints={[65, 59, 84, 84, 51, 55, 40]}
-                                pointHoverBackgroundColor="primary"
-                                label="Members"
-                                labels="months"
-                            />
-                        }
                     >
                     </CWidgetDropdown>
                 </CCol>
