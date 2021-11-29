@@ -41,7 +41,6 @@ const Register = () => {
             [name]: value
         })
     }
-    console.log(data)
     const handleUser = (e) => {
         const target = e.target;
         const value = target.value;

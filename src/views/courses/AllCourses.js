@@ -1,13 +1,15 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
+import Edit from './EditCourse'
 import {
-  fetchCourses
+  fetchCourses, getCourse
 } from "../../actions/coursesActions";
 const AllCourses = () => {
     const courses = useSelector((state) => state.courses.courses);
     const course = useSelector((state) => state.courses.course);
     const user = useSelector((state) => state.auth.user);
+    const [modal, setModal] = useState(false)
     const StudentDepartment =courses.filter(course=>course.departmentId===user?.department.id || course.departmentId===4)
     const dispatch = useDispatch();
     useEffect(() => {
@@ -44,11 +46,12 @@ const AllCourses = () => {
           cell: (row) => (
             <div className="table-icon">
               <span
-              style={{margin: '1rem'}}
-                // onClick={() => {
-                //   toggleEditModal(!editModal);
-                //   getDepartmentData(row.id);
-                // }}
+               style={{margin: '1rem',cursor:"pointer"}}
+               onClick={() => {
+                 setModal(!modal);
+                 dispatch(getCourse(row.id))
+                 // getDepartmentData(row.id);
+               }}
               >
                   Edit
               </span>
@@ -63,7 +66,7 @@ const AllCourses = () => {
       ];
   return (
       <>
-    
+      <Edit modal={modal} setModal={setModal}/>
     <DataTable
             columns={columns}
             data={StudentDepartment ? StudentDepartment : []}

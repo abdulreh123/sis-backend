@@ -43,27 +43,6 @@ const MyStudent = () => {
           name: "Registered",
           cell: row => (<span>{row.createdAt.replace('T', ' ').replace('.000Z', '')}</span>),
           sortable: true,},
-        {
-          name: "Actions",
-          cell: (row) => (
-            <div className="table-icon">
-              <span
-              style={{margin: '1rem'}}
-                onClick={() => {
-                  setModal(!modal);
-                  // getDepartmentData(row.id);
-                }}
-              >
-                  Edit
-              </span>
-              <span >
-                  Delete
-              </span>
-            </div>
-          ),
-          ignoreRowClick: true,
-          allowOverflow: true,
-        },
       ];
   return (
       <>

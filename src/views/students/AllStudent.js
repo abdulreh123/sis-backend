@@ -3,15 +3,16 @@ import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
 import Edit from './EditStudent'
 import {
-  fetchStudents,
+  fetchStudents,getStudent
 } from "../../actions/studentsActions";
 const AllStudent = () => {
     const students = useSelector((state) => state.student.students);
+    const student = useSelector((state) => state.student.student);
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchStudents());
-    }, [dispatch]);
+    }, [dispatch,student]);
 
     let columns = [
         {
@@ -37,15 +38,16 @@ const AllStudent = () => {
           cell: (row) => (
             <div className="table-icon">
               <span
-              style={{margin: '1rem'}}
+              style={{margin: '1rem',cursor:"pointer"}}
                 onClick={() => {
                   setModal(!modal);
+                  dispatch(getStudent(row.id))
                   // getDepartmentData(row.id);
                 }}
               >
                   Edit
               </span>
-              <span >
+              <span style={{cursor:"pointer"}} >
                   Delete
               </span>
             </div>
