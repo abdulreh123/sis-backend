@@ -95,12 +95,14 @@ const Dashboard = () => {
           </CRow>
             <Timetable
                   hoursInterval= {{ from: 9, to: 20 }}
+                  getDayLabel={((day) => day.slice(0,3))}
                     events={{
                       monday:monday ,
                       tuesday: tuesday,
                       wednesday: wednesday,
                       thursday: thursday,
                       friday: friday,
+                      saturday: saturday,
                     }}
                   />
         </CCardBody>

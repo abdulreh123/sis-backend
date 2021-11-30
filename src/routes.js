@@ -16,6 +16,7 @@ const Groups = React.lazy(() => import('./views/courses/Groups'));
 const CreateGroups = React.lazy(() => import('./views/courses/CreateGroup'));
 const Buildings = React.lazy(() => import('./views/buildings/AllBuildings'));
 const Rooms = React.lazy(() => import('./views/rooms/AllRooms'));
+const AddGroupRooms = React.lazy(() => import('./views/rooms/GroupRooms'));
 const User = React.lazy(() => import('./views/users/User'));
 const Profile = React.lazy(() => import('./views/profile/Profile'));
 const StudentProfile = React.lazy(() => import('./views/profile/StudentProfile'));
@@ -109,6 +110,13 @@ export const routes = [
     name: 'Rooms',
     exact: true,
     component: Rooms,
+    permissions:['Chairman',"SuperAdmin"]
+  },
+  {
+    path: '/group-rooms',
+    name: 'Group rooms',
+    exact: true,
+    component: AddGroupRooms,
     permissions:['Chairman',"SuperAdmin"]
   },
   {

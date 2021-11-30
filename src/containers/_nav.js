@@ -150,6 +150,12 @@ const _nav =  [
         to: '/rooms',
         permissions:['Chairman',"SuperAdmin"]
       },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Assign Rooms',
+        to: '/group-rooms',
+        permissions:['Chairman',"SuperAdmin"]
+      },
     ],
   },
   
