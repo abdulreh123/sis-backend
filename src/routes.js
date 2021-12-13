@@ -11,6 +11,7 @@ const AllAdvisors = React.lazy(() => import('./views/advisor/AllAdvisors'));
 const Advisors = React.lazy(() => import('./views/advisor/Advisor'));
 const CreateCourses = React.lazy(() => import('./views/courses/Create'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
+const CourseDashboard = React.lazy(() => import('./views/dashboard/CoursePage'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const Groups = React.lazy(() => import('./views/courses/Groups'));
 const CreateGroups = React.lazy(() => import('./views/courses/CreateGroup'));
@@ -153,6 +154,13 @@ export const routes = [
     name: 'All Advisors',
     component: AllAdvisors,
     permissions:['SuperAdmin']
+  },
+  {
+    path: '/courseDashboard/:id',
+    exact: true,
+    name: 'Course room',
+    component: CourseDashboard,
+    permissions:['SuperAdmin','Advisor','Chairman']
   },
   {
     path: '/advisors',

@@ -105,11 +105,13 @@ const Profile = () => {
       </div>
 
       <AddCourse modal={modal} setModal={setModal} studentId={student} />
+      <h4 style={{padding:"1rem"}}> Payments</h4>
+      <div style={{padding:"1rem"}}>
+      <AllPayment studentId={user?.userId} /></div>
       <AutoCourse modal={autoModal} setModal={setAutoModal} studentId={student} />
       <Payment modal={paymentmodal} setModal={setPaymentModal} studentId={user?.userId} />
-      My Payments
-      <AllPayment studentId={user?.userId} />
     </div>
+    
   )
 }
 

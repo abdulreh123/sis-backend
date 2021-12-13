@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
 import {
     CButton,
@@ -36,13 +37,13 @@ opacity: 1;
 transition: all 0.2s ease;
 text-align: ${(props) => props.textAlign};
 `;
-const DataTable = styled(Card)`
-    display: grid;
-    grid-template-columns: 33% 46% 20% ;
-    border: 0.5px solid #e3e4e8 !important;
-    margin: 1.5rem 2rem 2rem 2rem;
-    padding: 0 !important;
-`;
+// const DataTable = styled(Card)`
+//     display: grid;
+//     grid-template-columns: 33% 46% 20% ;
+//     border: 0.5px solid #e3e4e8 !important;
+//     margin: 1.5rem 2rem 2rem 2rem;
+//     padding: 0 !important;
+// `;
 const Cell = styled.div`
     border: 0.5px solid #E6E9ED;
     height: 2rem;
@@ -101,26 +102,26 @@ const Modals = (props) => {
                                     <MultiSelectLabel>Acadamic Year :</MultiSelectLabel>
                                     <CSelect custom name="select" id="select" onChange={handleChange}>
                                         <option value="0">Please select</option>
-                                            <option value="2021-2022 - Fall">2021-2022 - Fall</option>
-                                            <option value="2021-2022 - Spring">2021-2022 - Spring</option>
-                                            <option value="2021-2022 - Summer">2021-2022 - Summer</option>
-                                            <option value="2022-2023 - Fall">2022-2023 - Fall</option>
+                                        <option value="2021-2022 - Fall">2021-2022 - Fall</option>
+                                        <option value="2021-2022 - Spring">2021-2022 - Spring</option>
+                                        <option value="2021-2022 - Summer">2021-2022 - Summer</option>
+                                        <option value="2022-2023 - Fall">2022-2023 - Fall</option>
                                     </CSelect>
                                 </CFormGroup>
                             </CForm>
+                            {courses.length > 0 ?
 
-                            <DataTable>
-                                <CellHead>Code</CellHead>
-                                <CellHead>Name</CellHead>
-                                <CellHead>Credit</CellHead>
-                                {courses.map((log, index) =>
-                                    <>
-                                        <Cell>{log.code}</Cell>
-                                        <Cell>{log.name}</Cell>
-                                        <Cell>{log.credit}</Cell></>
-
-                                )}
-                            </DataTable>
+                                <DataTable
+                                    columns={columns}
+                                    data={courses ? courses : []}
+                                    striped={true}
+                                    responsive={true}
+                                    pagination={true}
+                                    highlightOnHover={true}
+                                    subHeaderAlign="center"
+                                    selectableRows
+                                    noHeader={true}
+                                /> : "no courses offers"}
                         </CCardBody>
                     </CModalBody>
                     <CModalFooter>

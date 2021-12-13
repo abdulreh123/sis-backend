@@ -1,11 +1,10 @@
 import React,{useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import {
     CWidgetDropdown,
     CRow,
     CCol,
 } from '@coreui/react'
-import ChartLineSimple from '../charts/ChartLineSimple'
-import ChartBarSimple from '../charts/ChartBarSimple'
 import { getadvisor } from 'src/actions/advisorActions'
 import { useSelector, useDispatch } from "react-redux";
 
@@ -21,12 +20,14 @@ const WidgetsDropdown = () => {
         <CRow>
             {advisor?.Group?.map(group =>
                 <CCol sm="6" lg="3">
+                <Link style={{cursor:"pointer"}} to={`/courseDashboard/${group.id}`}>
                     <CWidgetDropdown
                         color="gradient-primary"
                         header={group.name}
                         text="students:12"
                     >
                     </CWidgetDropdown>
+                </Link>
                 </CCol>
             )}
 

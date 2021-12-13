@@ -128,6 +128,20 @@ export const updateStudent = (data, id) => (dispatch) => {
         })
 
 }
+export const updateGrade = (data, studentId,courseID) => (dispatch) => {
+    axios.put(`/api/student/${studentId}/${courseID}`, data,  )
+        .then(branch => {
+            dispatch({
+                type: ADD_STUDENT,
+                payload: branch.data.data
+            });
+           dispatch(returnErrors(branch.data.message, branch.status));
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+
+}
 export const AddRemoveCourses = (id, data) => (dispatch) => {
     axios.put(`/api/student/add/remove/${id}`, data,  )
         .then(branch => {

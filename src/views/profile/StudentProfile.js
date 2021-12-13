@@ -39,7 +39,7 @@ const DataTable = styled(Card)`
     display: grid;
     grid-template-columns: 24% 40% 11% 10% 15%;
     border: 0.5px solid #e3e4e8 !important;
-    margin: 1.5rem 2rem 2rem 2rem;
+    margin: 1.5rem 1rem 2rem 1rem;
     padding: 0 !important;
 `;
 const Button = styled(CButton)`
@@ -153,10 +153,12 @@ const StudentProfile = (props) => {
                     </div>
                 </div>
             </div>
-            <h4> Payments</h4>
-            <AllPayment studentId={user?.userId} />
-            <h4> Awaiting Approval</h4>
-            <CourseApproval studentId={user?.userId} />
+            <h4 style={{padding:"1rem"}}> Payments</h4>
+            <div style={{padding:"1rem"}}>
+            <AllPayment studentId={user?.userId} /></div>
+            <h4 style={{padding:"1rem"}}> Awaiting Approval</h4>
+            <div style={{padding:"1rem"}}>
+            <CourseApproval studentId={user?.userId} /></div>
             <BranchWrapper>
                 {courses?.map((course, index) =>
                     <div margin="2rem" key={index} >
@@ -184,7 +186,7 @@ const StudentProfile = (props) => {
 
                             )}
                         </DataTable>
-                        <Gpa>AVERAGE: {course.gpa} / OVERALL AVERAGE: {course.gpa}/ STATUS : Successful / TOTAL : {course.totalcredit}</Gpa>
+                        <Gpa>AVERAGE: {Number.parseFloat(course.gpa).toPrecision(3)} / OVERALL AVERAGE: {Number.parseFloat(course.cgpa).toPrecision(3)}/ STATUS : {course.status} / TOTAL : {course.totalcredit}</Gpa>
 
                     </div>
                 )}
