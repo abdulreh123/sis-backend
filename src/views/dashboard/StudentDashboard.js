@@ -6,6 +6,7 @@ import {
   CRow,
 } from '@coreui/react'
 import { useSelector, useDispatch } from "react-redux";
+import Annoucements from './Annoucements'
 import {
     getTimeTable
 } from "../../actions/studentsActions";
@@ -84,6 +85,7 @@ const Dashboard = () => {
   return (
     <>
       <WidgetsDropdown />
+      <Annoucements />
       <CCard>
         <CCardBody>
           <CRow>
