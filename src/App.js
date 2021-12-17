@@ -1,5 +1,8 @@
 import React from 'react';
 import { HashRouter, Route, Switch,Redirect } from 'react-router-dom';
+import SnackbarProvider from 'react-simple-snackbar'
+import AlertTemplate from "react-alert-template-basic";
+import store from './store';
 import './scss/style.scss';
 import { PublicRoute } from './routing';
 const loading = (
@@ -18,6 +21,7 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 
 const App=()=>{
   return (
+  <SnackbarProvider store={store}>
     <HashRouter>
         <React.Suspense fallback={loading}>
           <Switch>
@@ -28,6 +32,7 @@ const App=()=>{
           </Switch>
         </React.Suspense>
     </HashRouter>
+  </SnackbarProvider>
   );
 }
 

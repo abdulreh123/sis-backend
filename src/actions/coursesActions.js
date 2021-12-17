@@ -3,6 +3,7 @@ import {
     ADD_COURSE
 } from './types';
 import axios from 'axios';
+import { returnErrors } from "./errorActions";
 //import Cookies from 'js-cookie';
 
 
@@ -14,9 +15,9 @@ export const fetchCourses = () => dispatch => {
                 payload: api.data.data
             });
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 }
 export const getCourse = (id) => dispatch => {
     axios.get(`/api/course/${id}`,  )
@@ -26,9 +27,9 @@ export const getCourse = (id) => dispatch => {
                 payload: course.data.data
             });
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 }
 export const AddCourse = (data) => (dispatch) => {
     axios.post("/api/course/create", data,  )
@@ -37,11 +38,11 @@ export const AddCourse = (data) => (dispatch) => {
                 type: ADD_COURSE,
                 payload: course.data.data
             });
-           // dispatch(returnErrors(course.data.message, course.status));
+           dispatch(returnErrors(course.data.message, course.status));
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 
  }
 export const updateCourse = (data, id) => (dispatch) => {
@@ -51,11 +52,11 @@ export const updateCourse = (data, id) => (dispatch) => {
                 type: ADD_COURSE,
                 payload: course.data.data
             });
-           // dispatch(returnErrors(course.data.message, course.status));
+            dispatch(returnErrors(course.data.message, course.status));
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 
 }
 export const deleteCourse = (id) => (dispatch) => {
@@ -67,7 +68,7 @@ export const deleteCourse = (id) => (dispatch) => {
                 payload: course.data.data
             });
         })
-        // .catch(error => {
-        //     dispatch(returnErrors(error.response.data.message, error.response.status));
-        // })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 }

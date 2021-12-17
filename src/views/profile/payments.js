@@ -10,7 +10,9 @@ const MyPayments = (props) => {
     const payment = useSelector((state) => state.payments.payment);
     const dispatch = useDispatch();
     useEffect(() => {
+      if(studentId){
         dispatch(getpaymentStudent(studentId));
+      }
     }, [dispatch,payment,studentId]);
     const openInNewTab = (image) => {
         const newWindow = window.open(`http://localhost:7000/static/assets/uploads/payments/${image}`, '_blank', 'noopener,noreferrer')

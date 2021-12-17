@@ -1,4 +1,4 @@
-import React, { lazy,useEffect,useState } from 'react'
+import React, { lazy,useEffect,useState,useRef } from 'react'
 import DataTable from "react-data-table-component";
 import {
   CCard,
@@ -9,6 +9,7 @@ import {
   CSelect,
   CButton
 } from '@coreui/react'
+import CSVReader from "react-csv-reader";
 import {
     updateGrade
 } from "../../actions/studentsActions";
@@ -23,13 +24,30 @@ const grades =["AA","BA","BB","CB","CC","DC","DD","FD","FF"]
 const CourseDashboard = (props) => {
     const  id  = props?.match?.params?.id;
   const group = useSelector((state) => state.group.group);
+  const profileImage = useRef(null)
   const student = useSelector((state) => state.student.student);
   const [modal, setModal] = useState(false)
   const [selected, setSelected] = useState([])
   const [button, showButton] = useState(false)
   const [previous, setPrevious] = useState({})
   const dispatch = useDispatch()
-  
+  const handleForce = (filedata) => {
+    filedata.map(file=>{
+      const studentId =group?.Students?.filter(stu=>stu.userId===file.studentId)
+      dispatch(updateGrade({ 
+        grade: file.grade,
+      midtermOne: file.midtermOne,
+      midtermTwo: file.midtermTwo,
+    final:file.final},studentId[0].id,id));
+    })
+  };
+
+  const papaparseOptions = {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    transformHeader: header => header.replace(/\W/g, "_")
+  };
   const handleChange = async(e) => {
     const target = e.target;
     const value = target.value;
@@ -41,6 +59,12 @@ const CourseDashboard = (props) => {
     }
     
 }
+
+const ProfilePicture = () => {
+  // current points to the mounted file input element
+  profileImage.current.click();
+};
+
   const rowSelectChange = (row) => {
     if (row.selectedRows.length !== 0) {
         showButton(true)
@@ -118,7 +142,7 @@ let columns = [
           <CRow>
             <CCol sm="5">
               <div style={{display:"flex"}}> 
-              <h4 style={{ marginRight: "2rem"}} id="traffic" className="card-title mb-0">All Students</h4>
+              <h4 style={{ marginRight: "2rem"}} id="traffic" className="card-title mb-0">Students</h4>
             {button?
             <CFormGroup row>
             <CCol xs="12" md="20">
@@ -130,9 +154,15 @@ let columns = [
                 </CSelect>
             </CCol>
         </CFormGroup>:
-         <div style={{cursor:"pointer"}}>
-                    Import CSV
-                  </div>  
+        <>
+        <div ref={profileImage} style={{display:'hidden'}}>
+        <CSVReader
+        cssClass="react-csv-input"
+        onFileLoaded={handleForce}
+        parserOptions={papaparseOptions}
+      />
+        </div>
+          </>
             }
               </div>
             </CCol>

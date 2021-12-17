@@ -19,6 +19,9 @@ import styled from 'styled-components'
 import {
    AddRemoveCourses
 } from "../../actions/studentsActions";
+import {
+   checkClash
+} from "../../actions/groupActions";
 const MultiselectCosutm = styled(Multiselect)`
   margin-bottom: 4px;
 `;
@@ -42,6 +45,8 @@ const Modals = (props) => {
             ...data,
             courses: e,
         });
+        const courses = data?.courses?.map(course=>course.id)
+        dispatch(checkClash(courses));
     };
     const handleChange=(e)=>{
         const target = e.target;

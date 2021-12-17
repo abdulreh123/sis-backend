@@ -60,6 +60,12 @@ const _nav =  [
         to: '/advisors',
         permissions:['Chairman']
       },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Register Advisor',
+        to: '/registerAdvisor',
+        permissions:['Chairman',"SuperAdmin"],
+      },
     ],
   },
   {

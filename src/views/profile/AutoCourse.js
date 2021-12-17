@@ -37,6 +37,7 @@ opacity: 1;
 transition: all 0.2s ease;
 text-align: ${(props) => props.textAlign};
 `;
+
 // const DataTable = styled(Card)`
 //     display: grid;
 //     grid-template-columns: 33% 46% 20% ;

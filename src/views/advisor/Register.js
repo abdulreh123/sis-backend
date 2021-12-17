@@ -2,8 +2,8 @@ import React, {useState,useEffect } from 'react'
 import CIcon from '@coreui/icons-react'
 import { useDispatch,useSelector } from "react-redux";
 import {
-    fetchAdvisor,
-} from "../../actions/advisorActions";
+    fetchDepartment,
+} from "../../actions/departmentActions";
 import {
     CButton,
     CCard,
@@ -18,19 +18,19 @@ import {
     CSelect,
 } from '@coreui/react'
 import {
-    AddStudents,
-} from "../../actions/studentsActions";
+    AddAdvisor,
+} from "../../actions/advisorActions";
 const Register = () => {
     const [data, setData] = useState({});
     const [user, setUser] = useState({});
-    const advisor = useSelector((state) => state.advisor.advisors);
+    const department = useSelector((state) => state.department.departments);
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
         const target = e.target;
         const value = target.value;
         const name = target.name;
-        if(name==='userId'||"advisorId"){
+        if("departmentId"){
             setData({
                 ...data,
                 [name]: parseInt(value)
@@ -56,34 +56,24 @@ const Register = () => {
             userId: data.userId,
             name: data.name,
             surname: data.surname,
-            passportNumber: data.passportNumber,
-            nationality: data.nationality,
-            advisorId: data.advisorId,
+            departmentId:data.departmentId,
             user: user
         }
         e.preventDefault();
-        dispatch(AddStudents({ ...create }));
-        document.getElementById("resetStudent").reset()
+        dispatch(AddAdvisor({ ...create }));
+        document.getElementById("resetAdvisor").reset()
     }
     useEffect(() => {
-        dispatch(fetchAdvisor());
+        dispatch(fetchDepartment());
     }, [dispatch]);
     return (
         <CCol xs="12" md="15">
             <CCard>
                 <CCardHeader>
-                    Register new student
+                    Register new Advisor
                 </CCardHeader>
                 <CCardBody>
-                    <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" id="resetStudent">
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Student ID</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="number" name="userId" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
+                    <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" id="resetAdvisor">
                         <CFormGroup row>
                             <CCol md="3">
                                 <CLabel htmlFor="number-input">Name</CLabel>
@@ -98,22 +88,6 @@ const Register = () => {
                             </CCol>
                             <CCol xs="12" md="9">
                                 <CInput id="number-input" type="text" name="surname" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Passport Number</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="text" name="passportNumber" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Nationality</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="text" name="nationality" onChange={handleChange} />
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>
@@ -142,21 +116,13 @@ const Register = () => {
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="date-input">Date of birth</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput type="date" id="date-input" name="dob" />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">advisor
+                            <CCol md="3">Department
                                 <CLabel htmlFor="select">Select</CLabel>
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CSelect custom name="advisorId" id="select">
-                                    <option value="0">Please select</option>{advisor?.map(dep=>
-                                    <option value={dep.id}>{dep.name + " " + dep.surname}</option>
+                                <CSelect custom name="departmentId" id="select" onChange={handleChange} >
+                                    <option value="0">Please select</option>{department?.map(dep=>
+                                    <option value={dep.id}>{dep.name}</option>
                                         )}
                                 </CSelect>
                             </CCol>

@@ -163,7 +163,7 @@ export const automate = (id, year) => (dispatch) => {
                 type: GET_AUTO_COURSE,
                 payload: branch.data.data
             });
-           dispatch(returnErrors(branch.data.message, branch.status));
+          // dispatch(returnErrors(branch.data.message, branch.status));
         })
         .catch(error => {
             dispatch(returnErrors(error.response.data.message, error.response.status));
@@ -177,7 +177,7 @@ export const CoursesApproval = (id) => (dispatch) => {
                 type: COURSES_TO_APPROVE,
                 payload: branch.data.data
             });
-           dispatch(returnErrors(branch.data.message, branch.status));
+         //  dispatch(returnErrors(branch.data.message, branch.status));
         })
         .catch(error => {
             dispatch(returnErrors(error.response.data.message, error.response.status));

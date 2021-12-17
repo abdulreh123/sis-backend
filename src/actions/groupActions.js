@@ -32,6 +32,14 @@ export const getGroup = (id) => dispatch => {
         dispatch(returnErrors(error.response.data.message, error.response.status));
        })
 }
+export const checkClash = (ids) => dispatch => {
+    axios.get(`/api/group/clash/[${ids}]`,  )
+        .then(group => {
+        })
+       .catch(error => {
+        dispatch(returnErrors(error.response.data.message, error.response.status));
+       })
+}
 export const getGroupDepartment = (id) => dispatch => {
     axios.get(`/api/group/department/${id}` )
         .then(group => {

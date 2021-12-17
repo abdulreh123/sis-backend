@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import styled from 'styled-components';
+import {Snackbar} from '../../../containers/reactAlert'
 import { useHistory } from "react-router-dom";
 import {
   CButton,
@@ -27,6 +27,7 @@ const checkLogin = () => {
 
 const Login = () => {
   const user = useSelector((state) => state.auth.user);
+  let { msg, status } = useSelector(state => state.errors);
   const [data, setData] = useState({});
   const dispatch = useDispatch();
   let history = useHistory();
@@ -102,6 +103,7 @@ const Login = () => {
           </CCol>
         </CRow>
       </CContainer>
+            <Snackbar type={status} message={msg} />
     </div>
   )
 }

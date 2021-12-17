@@ -79,11 +79,12 @@ const StudentProfile = (props) => {
     const [autoModal, setAutoModal] = useState(false)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getStudent(student));
-        dispatch(getTranscript(user?.userId));
+        if(student){
+            dispatch(getStudent(student));
+            dispatch(getTranscript(user?.userId));
+        }
     }, [dispatch, student]);
     useEffect(() => {
-        dispatch(getTranscript(user?.userId));
         dispatch(getGroupDepartment(user?.advisor?.departmentId));
     }, [dispatch, user,aprooved]);
     return (

@@ -10,7 +10,9 @@ const ApproveCourses = (props) => {
     const aprooved = useSelector((state) => state.student.approveMessage);
     const dispatch = useDispatch();
     useEffect(() => {
+      if(studentId){
         dispatch(CoursesApproval(studentId));
+      }
     }, [dispatch,aprooved,studentId]);
 
     let columns = [

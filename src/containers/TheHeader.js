@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import {Snackbar} from './reactAlert'
 import {
   CHeader,
   CToggler,
@@ -27,6 +28,7 @@ import {
 const TheHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector(state => state.sidebar.show)
+  let { msg, status } = useSelector(state => state.errors);
 
   const toggleSidebar = () => {
     [true, 'responsive'].includes(sidebarShow) ?
@@ -69,7 +71,7 @@ const TheHeader = () => {
         <CHeaderNavItem className="px-3">
         </CHeaderNavItem>
       </CHeaderNav>
-
+            <Snackbar type={status} message={msg} />
       <CHeaderNav className="px-3">
         <TheHeaderDropdownNotif/>
         {/* 
