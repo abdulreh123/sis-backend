@@ -49,7 +49,12 @@ const Info = styled.div`
     border-radius: 0.5rem;
     background: white;
     height: 23rem;
-    margin-right: 5rem;
+    margin-right: 5rem; 
+    @media (max-width:1200px)
+  { 
+    width: 100%;
+    margin-top:2rem;
+  }
 `;
 
 const grades = ["AA", "BA", "BB", "CB", "CC", "DC", "DD", "FD", "FF"]
