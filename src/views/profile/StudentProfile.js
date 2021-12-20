@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import AllPayment from './payments'
 import { Link } from 'react-router-dom'
 import {
-    getStudent, getTranscript
+    getStudent, getTranscript,predictedCgpa
 } from "../../actions/studentsActions";
 import {
     getGroupDepartment
@@ -74,10 +74,12 @@ const StudentProfile = (props) => {
     const student = props.match.params.id
     const user = useSelector((state) => state.student.student);
     const courses = useSelector((state) => state.student.studentCourse);
+    const prediction = useSelector((state) => state.student.prediction);
     const aprooved = useSelector((state) => state.student.approveMessage);
     const [modal, setModal] = useState(false)
     const [autoModal, setAutoModal] = useState(false)
     const dispatch = useDispatch()
+    const cgpas = courses.map(course=>course.cgpa)
     useEffect(() => {
         if(student){
             dispatch(getStudent(student));
@@ -89,6 +91,9 @@ const StudentProfile = (props) => {
             dispatch(getTranscript(user?.userId));
         }
     }, [dispatch, user,aprooved]);
+    useEffect(() => {
+            dispatch(predictedCgpa(cgpas));
+    }, [dispatch, courses ]);
     return (
         <div class="student-profile py-4">
             <div class="container">
@@ -134,9 +139,9 @@ const StudentProfile = (props) => {
                                         <td>Male</td>
                                     </tr>
                                     <tr>
-                                        <th width="30%">Religion</th>
+                                        <th width="30%">Predicted Cgpa</th>
                                         <td width="2%">:</td>
-                                        <td>Group</td>
+                                        <td>{prediction?.result}</td>
                                     </tr>
                                     <tr>
                                         <th width="30%">blood</th>

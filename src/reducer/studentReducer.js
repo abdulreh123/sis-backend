@@ -9,7 +9,8 @@ import {
     COURSE_APPROVED,
     GET_STUDENT_STATS,
     GET_TIMETABLE,
-    GET_CHAIRMAN_STATS
+    GET_CHAIRMAN_STATS,
+    GET_PREDICTED_CGPA
 } from '../actions/types';
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
     coursesToApprove: [],
     timeTable: [],
     chairmanStat:{},
-    approveMessage: {}
+    approveMessage: {},
+    prediction: {}
 }
 
 export default (state = initialState, action) => {
@@ -32,6 +34,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 students: action.payload
+            }
+        case GET_PREDICTED_CGPA:
+            return {
+                ...state,
+                prediction: action.payload
             }
         case GET_AUTO_COURSE:
             return {

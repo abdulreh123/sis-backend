@@ -31,6 +31,30 @@ export const getAnnouncements = (id) => dispatch => {
         dispatch(returnErrors(error.response.data.message, error.response.status));
        })
 }
+export const getDashboardAnnouncements = () => dispatch => {
+    axios.get(`/api/announcement/dashboard/announcement`,  )
+        .then(advisor => {
+            dispatch({
+                type: GET_ANNOUNCEMENT,
+                payload: advisor.data.data
+            });
+        })
+       .catch(error => {
+        dispatch(returnErrors(error.response.data.message, error.response.status));
+       })
+}
+export const getStudentAnnouncements = (id) => dispatch => {
+    axios.get(`/api/announcement/student/${id}`,  )
+        .then(advisor => {
+            dispatch({
+                type: GET_ANNOUNCEMENT,
+                payload: advisor.data.data
+            });
+        })
+       .catch(error => {
+        dispatch(returnErrors(error.response.data.message, error.response.status));
+       })
+}
 export const AddAnnouncements = (data) => (dispatch) => {
     axios.post("/api/announcement/create", data,  )
         .then(advisor => {

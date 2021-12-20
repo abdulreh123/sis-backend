@@ -14,7 +14,7 @@ import {
   CTabContent,
   CTabPane,
   CTabs,
-  CCardHeader
+  CButton
 } from '@coreui/react'
 import CSVReader from "react-csv-reader";
 import {
@@ -27,6 +27,7 @@ import {
 } from "../../actions/groupActions";
 import styled from 'styled-components'
 import CIcon from '@coreui/icons-react'
+import Create from './CreateAnnouncement';
 
 const Container = styled.div`
  display: grid;
@@ -76,6 +77,7 @@ const CourseDashboard = (props) => {
   const [selected, setSelected] = useState([])
   const [button, showButton] = useState(false)
   const [previous, setPrevious] = useState({})
+  const [addModal, setAddModal] = useState(false)
   const dispatch = useDispatch()
   const handleForce = (filedata) => {
     filedata.map(file => {
@@ -203,6 +205,8 @@ const CourseDashboard = (props) => {
               <h3 style={{ color: 'black', padding: '0rem 0rem 0rem 1rem', fontSize: '0.8rem' }}>{room?.day + " " + room?.timeStart + "-" + room?.timeEnd}</h3>
             ))}
           </div>
+      {user?.status === 'Student' ? null :
+          <CButton onClick={()=>setAddModal(true)}>Make Announcement</CButton>}
         </Profile>
         <Info >
           <div style={{ padding: '1rem' }}>
@@ -232,6 +236,7 @@ const CourseDashboard = (props) => {
           </div>
         </Info>
       </Container>
+      <Create modal={addModal} setModal={setAddModal} name={group?.Advisor?.name + " " + group?.Advisor?.surname} groupId={id}/>
       {user?.status === 'Student' ? null :
         <>
           <Edit modal={modal} setModal={setModal} previous={previous} />

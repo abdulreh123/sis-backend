@@ -10,7 +10,8 @@ import {
     COURSE_APPROVED,
     GET_STUDENT_STATS,
     GET_TIMETABLE,
-    GET_CHAIRMAN_STATS
+    GET_CHAIRMAN_STATS,
+    GET_PREDICTED_CGPA
 } from './types';
 import axios from 'axios';
 //import Cookies from 'js-cookie';
@@ -150,6 +151,19 @@ export const AddRemoveCourses = (id, data) => (dispatch) => {
                 payload: branch.data.data
             });
            dispatch(returnErrors(branch.data.message, branch.status));
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+
+}
+export const predictedCgpa = (cgpas) => (dispatch) => {
+    axios.get(`http://localhost:8000/predict/%7Bvalue%7D?name=[${cgpas}]`, )
+        .then(branch => {
+            dispatch({
+                type: GET_PREDICTED_CGPA,
+                payload: branch.data
+            });
         })
         .catch(error => {
             dispatch(returnErrors(error.response.data.message, error.response.status));

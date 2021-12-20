@@ -1,5 +1,9 @@
-import React, { lazy, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
+import { useSelector, useDispatch } from "react-redux";
+import {
+    getStudentAnnouncements,getDashboardAnnouncements
+  } from "../../actions/annoucementActions";
 const Container = styled.div`
  display: grid;
   grid-template-columns:  33% 33% 33% ;
@@ -11,30 +15,32 @@ const Container = styled.div`
 
 
 const Annoucements = (props) => {
-  const stidentId = props?.match?.params?.id;
+  const user = useSelector((state) => state.auth.user);
+  const data = useSelector((state) => state.announcements.announcements);
+  const dispatch= useDispatch()
 
-
+  useEffect(() => {
+    if(user.status==='Student'){
+      dispatch(getStudentAnnouncements(user?.Id));
+    }else{
+      dispatch(getDashboardAnnouncements());
+    }
+  }, [dispatch, user]);
   return (
     <>
         <div class="leftbox">
           <h2>Announcements</h2>
           <Container class="content">
+            {data.map(announcement=>
             <div >
-              <h3 style={{color:'white'}}>December 25,2021</h3>
-              <p style={{color:'white'}}>About vaccines validity </p>
+              {announcement.Group? 
+              <h3 style={{color:'white',fontSize: '1.2rem'}}>{announcement?.Group?.name}</h3>:
+              <h3 style={{color:'white'}}>{announcement?.sender}</h3>
+              }
+              <p style={{color:'white',fontSize: '0.6rem'}}>{announcement?.createdAt?.slice(0,10) +" "+ announcement?.createdAt?.slice(11,16)}</p>
+              <p style={{color:'white'}}>{announcement?.content}</p>
             </div>
-            <div >
-              <h3 style={{color:'white'}}>December 29,2021</h3>
-              <p style={{color:'white'}}>About Antigen Test</p>
-            </div>
-            <div>
-              <h3 style={{color:'white'}}>January 1,2022</h3>
-              <p style={{color:'white'}}>New year break</p>
-            </div>
-            <div>
-              <h3 style={{color:'white'}}>January 22, 2022</h3>
-              <p style={{color:'white'}}>Diploma approval procedures for the 2021-2022 fall semester graduates</p>
-            </div>
+              )}
         </Container>
 
       </div>

@@ -9,6 +9,9 @@ import AddCourse from './AddCourse'
 import AutoCourse from './AutoCourse'
 import styled from 'styled-components';
 import {
+    getStudent, getTranscript,predictedCgpa
+} from "../../actions/studentsActions";
+import {
     getGroupDepartment
 } from "../../actions/groupActions";
 const IMG = styled.img`
@@ -26,11 +29,18 @@ const Profile = () => {
   const student =user?.Id
   const dispatch = useDispatch()
   const [paymentmodal, setPaymentModal] = useState(false)
+  const prediction = useSelector((state) => state.student.prediction);
+  const courses = useSelector((state) => state.student.studentCourse);
   const [modal, setModal] = useState(false)
   const [autoModal, setAutoModal] = useState(false)
+  const cgpas = courses.map(course=>course.cgpa)
   useEffect(()=>{
     dispatch(getGroupDepartment(user?.department.id));
-  },[])
+    dispatch(getTranscript(user?.userId));
+  },[user])
+  useEffect(() => {
+          dispatch(predictedCgpa(cgpas));
+  }, [dispatch, courses ]);
   return (
     <div class="student-profile py-4">
       <div class="container">
@@ -80,9 +90,9 @@ const Profile = () => {
                     <td>Male</td>
                   </tr>
                   <tr>
-                    <th width="30%">Religion</th>
+                    <th width="30%">Predicted Cgpa</th>
                     <td width="2%">:</td>
-                    <td>Group</td>
+                    <td>{prediction?.result}</td>
                   </tr>
                   <tr>
                     <th width="30%">blood</th>
