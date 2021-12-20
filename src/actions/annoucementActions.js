@@ -1,17 +1,17 @@
 import { returnErrors } from "./errorActions";
 import {
-    GET_ADVISOR,
-    ADD_ADVISOR,
+    GET_ANNOUNCEMENT,
+    ADD_ANNOUNCEMENT,
 } from './types';
 import axios from 'axios';
 //import Cookies from 'js-cookie';
 
 
-export const fetchAdvisor = () => dispatch => {
-    axios.get(`/api/advisor`,  )
+export const fetchAnnouncements = () => dispatch => {
+    axios.get(`/api/announcement`,  )
         .then(api => {
             dispatch({
-                type: GET_ADVISOR,
+                type: GET_ANNOUNCEMENT,
                 payload: api.data.data
             });
         })
@@ -19,11 +19,11 @@ export const fetchAdvisor = () => dispatch => {
         dispatch(returnErrors(error.response.data.message, error.response.status));
         })
 }
-export const getadvisor = (id) => dispatch => {
-    axios.get(`/api/advisor/${id}`,  )
+export const getAnnouncements = (id) => dispatch => {
+    axios.get(`/api/announcement/${id}`,  )
         .then(advisor => {
             dispatch({
-                type: ADD_ADVISOR,
+                type: ADD_ANNOUNCEMENT,
                 payload: advisor.data.data
             });
         })
@@ -31,11 +31,11 @@ export const getadvisor = (id) => dispatch => {
         dispatch(returnErrors(error.response.data.message, error.response.status));
        })
 }
-export const AddAdvisor = (data) => (dispatch) => {
-    axios.post("/api/advisor/create", data,  )
+export const AddAnnouncements = (data) => (dispatch) => {
+    axios.post("/api/announcement/create", data,  )
         .then(advisor => {
             dispatch({
-                type: ADD_ADVISOR,
+                type: ADD_ANNOUNCEMENT,
                 payload: advisor.data.data
             });
            dispatch(returnErrors(advisor.data.message, advisor.status));
@@ -45,11 +45,11 @@ export const AddAdvisor = (data) => (dispatch) => {
          })
 
  }
-export const updateAdvisor = (data, id) => (dispatch) => {
-    axios.put(`/api/advisor/${id}`, data,  )
+export const updateAnnouncements = (data, id) => (dispatch) => {
+    axios.put(`/api/announcement/${id}`, data,  )
         .then(advisor => {
             dispatch({
-                type: ADD_ADVISOR,
+                type: ADD_ANNOUNCEMENT,
                 payload: advisor.data.data
             });
            dispatch(returnErrors(advisor.data.message, advisor.status));
@@ -59,12 +59,12 @@ export const updateAdvisor = (data, id) => (dispatch) => {
         })
 
 }
-export const deleteAdvisor = (id) => (dispatch) => {
+export const deleteAnnouncements = (id) => (dispatch) => {
 
     axios.delete(`/api/advisor/${id}`,  )
         .then(advisor => {
             dispatch({
-                type: ADD_ADVISOR,
+                type: ADD_ANNOUNCEMENT,
                 payload: advisor.data.data
             });
         })

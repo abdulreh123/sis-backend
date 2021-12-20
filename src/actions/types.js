@@ -53,3 +53,7 @@ export const ADD_PAYMENT = "ADD_PAYMENT";
 export const SHOW_SIDEBAR = "SHOW_SIDEBAR";
 export const HIDE_SIDEBAR = "HIDE_SIDEBAR";
 export const RES_SIDEBAR = "RES_SIDEBAR";
+
+
+export const GET_ANNOUNCEMENT = "GET_ANNOUNCEMENT";
+export const ADD_ANNOUNCEMENT = "ADD_ANNOUNCEMENT";
