@@ -1,7 +1,8 @@
 import React,{useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux";
+import {Link} from 'react-router-dom'
 import {
-  getTranscript
+  getTranscript,getStudent
 } from "../../actions/studentsActions";
 import styled from 'styled-components';
 const BranchWrapper = styled.div`
@@ -75,7 +76,7 @@ const StudentCourses = () => {
                         {log.studentscourses.academicYear=== course.year?
                             <>
                             <Cell>{log.Course.code}</Cell>
-                                <Cell>{log.Course.name}</Cell>
+                                <Cell><Link to={`/courseDashboard/${log?.id}`}>{log.Course.name}</Link></Cell>
                                 <Cell>{log.Course.credit}</Cell>
                                 <Cell>{log.studentscourses?.grade}</Cell>
                                 <Cell>{log.studentscourses?.CrPts}</Cell> </> :null}

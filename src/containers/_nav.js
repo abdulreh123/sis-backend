@@ -98,7 +98,7 @@ const _nav =  [
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: 'Courses',
+        name: 'All Courses',
         to: '/courses',
         permissions:['Student','Advisor','Chairman',"SuperAdmin"]
       },

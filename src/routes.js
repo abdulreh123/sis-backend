@@ -168,7 +168,7 @@ export const routes = [
     exact: true,
     name: 'Course room',
     component: CourseDashboard,
-    permissions:['SuperAdmin','Advisor','Chairman']
+    permissions:['SuperAdmin','Advisor','Chairman','Student']
   },
   {
     path: '/advisors',
