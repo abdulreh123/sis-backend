@@ -14,6 +14,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import Timetable from 'react-timetable-events'
+import Annoucements from './Annoucements'
 
 const WidgetsDropdown = lazy(() => import('../widgets/AdvisorDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
@@ -24,15 +25,10 @@ const Dashboard = () => {
     <h3>
     My Courses</h3>
       <WidgetsDropdown />
-      <CCard>
-        <CCardBody>
-          <CRow>
-            <CCol sm="5">
-              <h4 id="traffic" className="card-title mb-0">Your Time Table</h4>
-            </CCol>
-            <CCol sm="7" className="d-none d-md-block">
-            </CCol>
-          </CRow>
+      <Annoucements />
+
+      <h3 style={{marginTop: '1rem'}}>Your Time Table</h3>
+      <div style={{marginTop: '1rem'}}>
             <Timetable
                   hoursInterval= {{ from: 9, to: 20 }}
                   getDayLabel={((day) => day.slice(0,3))}
@@ -59,8 +55,7 @@ const Dashboard = () => {
                       friday: [],
                     }}
                   />
-        </CCardBody>
-      </CCard>
+                  </div>
     </>
   )
 }

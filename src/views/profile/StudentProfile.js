@@ -81,11 +81,13 @@ const StudentProfile = (props) => {
     useEffect(() => {
         if(student){
             dispatch(getStudent(student));
-            dispatch(getTranscript(user?.userId));
         }
     }, [dispatch, student]);
     useEffect(() => {
-        dispatch(getGroupDepartment(user?.advisor?.departmentId));
+        if(user?.userId){
+            dispatch(getGroupDepartment(user?.advisor?.departmentId));
+            dispatch(getTranscript(user?.userId));
+        }
     }, [dispatch, user,aprooved]);
     return (
         <div class="student-profile py-4">

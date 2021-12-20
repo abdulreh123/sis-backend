@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Multiselect } from "multiselect-react-dropdown";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -45,8 +45,6 @@ const Modals = (props) => {
             ...data,
             courses: e,
         });
-        const courses = data?.courses?.map(course=>course.id)
-        dispatch(checkClash(courses));
     };
     const handleChange=(e)=>{
         const target = e.target;
@@ -66,6 +64,12 @@ const Modals = (props) => {
         props.setModal(!props.modal)
         document.getElementById("resetAdd").reset()
     }
+    useEffect(() => {
+        const courses = data?.courses?.map(course=>course.id)
+        if(courses!==undefined){
+            dispatch(checkClash(courses));
+        }
+    }, [dispatch, data]);
     return (
         <CRow>
             <CCardBody>
