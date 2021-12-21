@@ -28,6 +28,7 @@ import {
 const TheHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector(state => state.sidebar.show)
+  const user = useSelector(state => state.auth.user)
   let { msg, status } = useSelector(state => state.errors);
 
   const toggleSidebar = () => {
@@ -77,7 +78,7 @@ const TheHeader = () => {
         {/* 
         <TheHeaderDropdownTasks/>
         <TheHeaderDropdownMssg/> */}
-        <TheHeaderDropdown/>
+        <TheHeaderDropdown user={user}/>
       </CHeaderNav>
     </CHeader>
   )

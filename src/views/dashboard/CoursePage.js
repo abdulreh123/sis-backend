@@ -29,6 +29,11 @@ import styled from 'styled-components'
 import CIcon from '@coreui/icons-react'
 import Create from './CreateAnnouncement';
 
+const Category = styled.div`
+    margin: 2rem 2rem 0 2rem;
+    border-bottom: 1px solid #e3e4e8;
+    font-size: 1.2rem;
+`;
 const Container = styled.div`
  display: grid;
   grid-template-columns:  25% 75%;
@@ -57,7 +62,7 @@ const Info = styled.div`
     margin-top:2rem;
   }
 `;
-
+const weeks =["Week 1","Week 2","Week 3","Week 4","Week 5"]
 const grades = ["AA", "BA", "BB", "CB", "CC", "DC", "DD", "FD", "FF"]
 const CourseDashboard = (props) => {
   const id = props?.match?.params?.id;
@@ -286,7 +291,11 @@ const CourseDashboard = (props) => {
               />
             </CCardBody>
           </CCard></>}
-          
+          {weeks.map((week,index)=>
+          <>
+            <Category key={index}>{week}</Category>
+            <div style={{padding:'2rem'}}>{`Lecture ${index+1}`}</div></>
+            )}
 
     </>
   )

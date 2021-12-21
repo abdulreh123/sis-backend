@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useHistory,Link } from "react-router-dom";
 import {
   CDropdown,
@@ -13,8 +13,9 @@ import {
   logOutUser,
 } from "../actions/authActions";
 
-const TheHeaderDropdown = () => {
-  const dispatch = useDispatch();  
+const TheHeaderDropdown = (props) => {
+  const dispatch = useDispatch();
+   const user= props.user
   let history = useHistory();
   const logOut = async ()=>{
     dispatch(logOutUser())
@@ -31,11 +32,18 @@ const TheHeaderDropdown = () => {
     >
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
+          {user?.Id===2?
           <CImg
-            src={'avatars/6.jpg'}
-            className="c-avatar-img"
-            alt="admin@bootstrapmaster.com"
-          />
+              src={'avatars/6.jpg'}
+              className="c-avatar-img"
+              alt="admin@bootstrapmaster.com"
+            />:
+            <CImg
+                src={'https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg'}
+                className="c-avatar-img"
+                alt="admin@bootstrapmaster.com"
+              />}
+          
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">

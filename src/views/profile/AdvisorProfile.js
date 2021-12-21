@@ -39,7 +39,7 @@ const Profile = () => {
                         <div class="card shadow-sm">
                             <div class="card-header bg-transparent text-center">
                                 <IMG
-                                    src={'avatars/6.jpg'}
+                                    src={'https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg'}
                                     className="c-avatar-img"
                                     alt="admin@bootstrapmaster.com"
                                 />

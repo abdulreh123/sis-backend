@@ -93,7 +93,7 @@ const _nav =  [
     _tag: 'CSidebarNavDropdown',
     name: 'Courses',
     route: '/courses',
-    icon: 'cil-book',
+    icon: 'cil-bookmark',
     permissions:['Student','Advisor','Chairman',"SuperAdmin"],
     _children: [
       {

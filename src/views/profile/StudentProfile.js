@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import AllPayment from './payments'
 import { Link } from 'react-router-dom'
 import {
-    getStudent, getTranscript,predictedCgpa
+    getStudent, getTranscript, predictedCgpa
 } from "../../actions/studentsActions";
 import {
     getGroupDepartment
@@ -79,21 +79,21 @@ const StudentProfile = (props) => {
     const [modal, setModal] = useState(false)
     const [autoModal, setAutoModal] = useState(false)
     const dispatch = useDispatch()
-    const cgpas = courses.map(course=>course.cgpa)
+    const cgpas = courses.map(course => course.cgpa)
     useEffect(() => {
-        if(student){
+        if (student) {
             dispatch(getStudent(student));
         }
     }, [dispatch, student]);
     useEffect(() => {
-        if(user?.userId){
+        if (user?.userId) {
             dispatch(getGroupDepartment(user?.advisor?.departmentId));
             dispatch(getTranscript(user?.userId));
         }
-    }, [dispatch, user,aprooved]);
+    }, [dispatch, user, aprooved]);
     useEffect(() => {
-            dispatch(predictedCgpa(cgpas));
-    }, [dispatch, courses ]);
+        dispatch(predictedCgpa(cgpas));
+    }, [dispatch, courses]);
     return (
         <div class="student-profile py-4">
             <div class="container">
@@ -101,11 +101,15 @@ const StudentProfile = (props) => {
                     <div class="col-lg-4">
                         <div class="card shadow-sm">
                             <div class="card-header bg-transparent text-center">
+                                {user?.Id === 2 ?
                                 <IMG
                                     src={'avatars/6.jpg'}
                                     className="c-avatar-img"
                                     alt="admin@bootstrapmaster.com"
-                                />
+                                />: <IMG src={'https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg'}
+                                className="c-avatar-img"
+                                alt="admin@bootstrapmaster.com"
+                            />}
                                 <h3>
                                     {user?.name + " " + user?.surname}</h3>
                             </div>
@@ -161,12 +165,12 @@ const StudentProfile = (props) => {
                     </div>
                 </div>
             </div>
-            <h4 style={{padding:"1rem"}}> Payments</h4>
-            <div style={{padding:"1rem"}}>
-            <AllPayment studentId={user?.userId} /></div>
-            <h4 style={{padding:"1rem"}}> Awaiting Approval</h4>
-            <div style={{padding:"1rem"}}>
-            <CourseApproval studentId={user?.userId} /></div>
+            <h4 style={{ padding: "1rem" }}> Payments</h4>
+            <div style={{ padding: "1rem" }}>
+                <AllPayment studentId={user?.userId} /></div>
+            <h4 style={{ padding: "1rem" }}> Awaiting Approval</h4>
+            <div style={{ padding: "1rem" }}>
+                <CourseApproval studentId={user?.userId} /></div>
             <BranchWrapper>
                 {courses?.map((course, index) =>
                     <div margin="2rem" key={index} >
