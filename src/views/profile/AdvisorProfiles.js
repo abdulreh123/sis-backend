@@ -54,11 +54,11 @@ const OtherInfo = styled.div`
   background: white;
   margin-top: 3rem; 
 `;
-const AdvisorProfile = () => {
-  const user = useSelector((state) => state.auth.user);
+const AdvisorProfile = (props) => {
   const students = useSelector((state) => state.advisor.advisor.Students);
   const Courses = useSelector((state) => state.advisor.advisor.Group);
-  const advisor = user?.Id
+  const general = useSelector((state) => state.advisor.advisor);
+  const advisor = props?.match?.params?.id;
   const dispatch = useDispatch()
   const lorem = `null`
   useEffect(() => {
@@ -112,11 +112,11 @@ const AdvisorProfile = () => {
               className="c-avatar-img"
               alt="admin@bootstrapmaster.com"
             /></div>
-          <h3 style={{ color: 'black', fontSize: '1.2rem' }}>{user?.name}</h3>
+          <h3 style={{ color: 'black', fontSize: '1.2rem' }}>{general?.name +" "+general?.surname}</h3>
           <p style={{ color: 'black' }}>Instructor</p>
           <div style={{ display: 'flex', padding: '0rem 0rem 0.5rem 1rem' }}>
             <CIcon name="cil-envelope-open" />
-            <h3 style={{ color: 'black', padding: '0rem 0rem 0rem 1rem', fontSize: '0.8rem' }}>{user?.name.toLowerCase() + "." + user?.name.toLowerCase()}@gmail.com</h3>
+            <h3 style={{ color: 'black', padding: '0rem 0rem 0rem 1rem', fontSize: '0.8rem' }}>{general?.name?.toLowerCase() + "." + general?.surname?.toLowerCase()}@gmail.com</h3>
           </div>
           <div style={{ display: 'flex', padding: '0rem 0rem 0.5rem 1rem' }}>
             <CIcon name="cil-user" />

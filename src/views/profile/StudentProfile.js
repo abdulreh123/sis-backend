@@ -92,7 +92,7 @@ const StudentProfile = (props) => {
         }
     }, [dispatch, user, aprooved]);
     useEffect(() => {
-        dispatch(predictedCgpa(cgpas));
+       // dispatch(predictedCgpa(cgpas));
     }, [dispatch, courses]);
     return (
         <div class="student-profile py-4">
@@ -145,7 +145,7 @@ const StudentProfile = (props) => {
                                     <tr>
                                         <th width="30%">Predicted Cgpa</th>
                                         <td width="2%">:</td>
-                                        <td>{prediction?.result}</td>
+                                         <td>{/*{prediction?.result}*/}</td> 
                                     </tr>
                                     <tr>
                                         <th width="30%">blood</th>

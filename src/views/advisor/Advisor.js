@@ -24,7 +24,11 @@ const MyStudent = () => {
       {
         selector: "name",
         name: "Name",
-        sortable: true,},
+        sortable: true,
+        cell: (row) => <LinkName to={`/advisorProfile/${row.id}`}>
+          {row.name + " " + row.surname}
+        </LinkName>
+      },
       {
         selector: "surname",
         name: "Surname",

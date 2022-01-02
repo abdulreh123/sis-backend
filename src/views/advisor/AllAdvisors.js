@@ -1,10 +1,15 @@
 import React,{useEffect,useState} from 'react'
 import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
+import {Link} from 'react-router-dom'
 import Edit from './EditAdvisor'
 import {
   fetchAdvisor,
 } from "../../actions/advisorActions";
+import styled from 'styled-components'
+const LinkName = styled(Link)`
+  color: #8d0000 !important;
+`;
 const AllAdvisor = () => {
     const students = useSelector((state) => state.advisor.advisors);
     const [modal, setModal] = useState(false)
@@ -17,7 +22,10 @@ const AllAdvisor = () => {
         {
           selector: "name",
           name: "Name",
-          sortable: true,},
+          sortable: true,
+          cell: (row) => <LinkName to={`/advisorProfile/${row.id}`}>
+            {row.name + " " + row.surname}
+          </LinkName>},
         {
           selector: "surname",
           name: "Surname",

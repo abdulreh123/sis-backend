@@ -10,6 +10,7 @@ const Department = React.lazy(() => import('./views/departments/AllDepartments')
 const Courses = React.lazy(() => import('./views/courses/AllCourses'));
 const AllAdvisors = React.lazy(() => import('./views/advisor/AllAdvisors'));
 const Advisors = React.lazy(() => import('./views/advisor/Advisor'));
+const AdvisorsProfiles = React.lazy(() => import('./views/profile/AdvisorProfiles'));
 const CreateCourses = React.lazy(() => import('./views/courses/Create'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const CourseDashboard = React.lazy(() => import('./views/dashboard/CoursePage'));
@@ -169,6 +170,13 @@ export const routes = [
     name: 'Course room',
     component: CourseDashboard,
     permissions:['SuperAdmin','Advisor','Chairman','Student']
+  },
+  {
+    path: '/advisorProfile/:id',
+    exact: true,
+    name: 'advisor profile',
+    component: AdvisorsProfiles,
+    permissions:['Chairman','SuperAdmin']
   },
   {
     path: '/advisors',
