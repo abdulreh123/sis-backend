@@ -92,9 +92,9 @@ const Login = () => {
                       <CCol xs="6">
                         <CButton color="primary" className="px-4" onClick={handleSubmit}>Login</CButton>
                       </CCol>
-                      <CCol xs="6" className="text-right">
+                      {/* <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
-                      </CCol>
+                      </CCol> */}
                     </CRow>
                   </CForm>
                 </CCardBody>

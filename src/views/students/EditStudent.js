@@ -144,7 +144,7 @@ const Modals = (props) => {
                                 <CLabel htmlFor="select">Select</CLabel>
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CSelect custom name="select" id="select">
+                                <CSelect custom name="advisorId" id="select" onChange={handleChange}>
                                 <option value="0">Please select</option>{advisor?.map(dep=>
                                     <option value={dep.id} >{dep.name + " " + dep.surname}</option>
                                         )}

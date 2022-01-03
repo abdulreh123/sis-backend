@@ -52,10 +52,6 @@ const TheHeaderDropdown = (props) => {
           <CIcon name="cil-user" className="mfe-2" />Profile
           </Link>
         </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-settings" className="mfe-2" />
-          Settings
-        </CDropdownItem>
         <CDropdownItem divider />
         <CDropdownItem onClick={action}>
           <CIcon name="cil-lock-locked" className="mfe-2" />

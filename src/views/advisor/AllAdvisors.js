@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {Link} from 'react-router-dom'
 import Edit from './EditAdvisor'
 import {
-  fetchAdvisor,
+  fetchAdvisor,deleteAdvisor,getadvisor
 } from "../../actions/advisorActions";
 import styled from 'styled-components'
 const LinkName = styled(Link)`
@@ -12,11 +12,12 @@ const LinkName = styled(Link)`
 `;
 const AllAdvisor = () => {
     const students = useSelector((state) => state.advisor.advisors);
+    const advisors = useSelector((state) => state.advisor.advisor);
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchAdvisor());
-    }, [dispatch]);
+    }, [dispatch,advisors]);
 
     let columns = [
         {
@@ -26,10 +27,7 @@ const AllAdvisor = () => {
           cell: (row) => <LinkName to={`/advisorProfile/${row.id}`}>
             {row.name + " " + row.surname}
           </LinkName>},
-        {
-          selector: "surname",
-          name: "Surname",
-          sortable: true,},
+     
         {
           selector: "Department",
           name: "Department",
@@ -40,15 +38,17 @@ const AllAdvisor = () => {
           cell: (row) => (
             <div className="table-icon">
               <span
-              style={{margin: '1rem'}}
+              style={{margin: '1rem',cursor:"pointer"}}
                 onClick={() => {
                   setModal(!modal);
-                  // getDepartmentData(row.id);
+                  dispatch(getadvisor(row.id));
                 }}
               >
                   Edit
               </span>
-              <span >
+              <span style={{cursor:"pointer"}} onClick={() => {
+                  dispatch(deleteAdvisor(row.id));
+                }}> 
                   Delete
               </span>
             </div>

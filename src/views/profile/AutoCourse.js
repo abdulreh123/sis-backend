@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -16,55 +16,30 @@ import {
 } from '@coreui/react'
 import styled from 'styled-components'
 import {
+    AddRemoveCourses
+ } from "../../actions/studentsActions";
+ import {
+    checkClash
+ } from "../../actions/groupActions";
+import {
     automate
 } from "../../actions/studentsActions";
 const MultiSelectLabel = styled.span`
   font-size: 0.8rem;
   color: var(--secondary-text-color);
 `;
-const Card = styled.div`
-display: flex;
-height: ${(props) => props.height};
-margin: ${(props) => props.margin};
-flex-direction: column;
-color: ${(props) => props.color || "#4e4e51"};
-background: ${(props) => props.background || "#fff"};
-padding: ${(props) => props.padding || "10px 17px"};
-border-radius: ${(props) => props.borderRadius || "8px"};
-border: ${(props) => props.border || "1px solid #E6E9ED"};
-border-top: ${(props) => props.borderTop};
-opacity: 1;
-transition: all 0.2s ease;
-text-align: ${(props) => props.textAlign};
-`;
 
-// const DataTable = styled(Card)`
-//     display: grid;
-//     grid-template-columns: 33% 46% 20% ;
-//     border: 0.5px solid #e3e4e8 !important;
-//     margin: 1.5rem 2rem 2rem 2rem;
-//     padding: 0 !important;
-// `;
-const Cell = styled.div`
-    border: 0.5px solid #E6E9ED;
-    height: 2rem;
-    text-align: center;
-    padding: 3px;
-`;
-const CellHead = styled.div`
-    padding: 12px;
-    border: 0.5px solid #E6E9ED;
-    height: 3rem;
-    text-align: center;
-    font-weight: 550;
-`;
 const Modals = (props) => {
     const studentId = props.studentId
     const dispatch = useDispatch()
+    const [selected, setSelected] = useState([])
+    const [button, showButton] = useState(false)
+    const [year, setyear] = useState('');
     const courses = useSelector((state) => state.student.autoCourse);
     const handleChange = (e) => {
         const target = e.target;
         const value = target.value;
+        setyear(value)
         dispatch(automate(studentId, value));
     }
     let columns = [
@@ -77,19 +52,46 @@ const Modals = (props) => {
             selector: "code",
             name: "Code",
             sortable: true,
+            cell:(row) => (<span>{row.Course.code}</span>)
         },
         {
             selector: "credit",
             name: "Credit",
             sortable: true,
+            cell:(row) => (<span>{row.Course.credit}</span>)
         },
     ];
+    const rowSelectChange = (row) => {
+        if (row.selectedRows.length !== 0) {
+          showButton(true)
+        }
+        if (row.selectedRows.length === 0) {
+          showButton(false)
+        }
+        setSelected(row.selectedRows)
+      }
+      useEffect(() => {
+        const courses = selected.map(course=>course.id)
+        if(courses.length>0){
+            dispatch(checkClash(courses));
+        }
+    }, [dispatch, selected]);
+    const submit =(e)=>{
+     e.preventDefault()
+     const courses = selected.map(course=>course.id)
+     const create = {
+        type:'add',
+        year: year,
+        courses:courses
+    }
+    dispatch(AddRemoveCourses(studentId,{ ...create }));
+    }
     return (
         <CRow>
             <CCardBody>
                 <CModal
                     show={props.modal}
-                    onClose={() => props.setModal(!props.modal)}
+                    onClose={() => {props.setModal(!props.modal);showButton(false)}}
                     color="primary"
                     size="lg"
                 >
@@ -110,8 +112,9 @@ const Modals = (props) => {
                                     </CSelect>
                                 </CFormGroup>
                             </CForm>
+                            
                             {courses.length > 0 ?
-
+                              
                                 <DataTable
                                     columns={columns}
                                     data={courses ? courses : []}
@@ -121,9 +124,12 @@ const Modals = (props) => {
                                     highlightOnHover={true}
                                     subHeaderAlign="center"
                                     selectableRows
+                                    onSelectedRowsChange={rowSelectChange}
                                     noHeader={true}
                                 /> : "no courses offers"}
                         </CCardBody>
+                        
+                        {button? <CButton color="primary" onClick={submit}>Add</CButton>:null}
                     </CModalBody>
                     <CModalFooter>
                     </CModalFooter>

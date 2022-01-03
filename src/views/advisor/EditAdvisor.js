@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux";
 import {
   CButton,
   CCardBody,
@@ -15,8 +16,17 @@ import {
   CLabel,
   CSelect,
 } from '@coreui/react'
+import {
+    fetchDepartment
+} from "../../actions/departmentActions";
+import {
+    updateAdvisor
+  } from "../../actions/advisorActions";
 
 const Modals = (props) => {
+    const advisor = useSelector((state) => state.advisor.advisor);
+    const department = useSelector((state) => state.department.departments);
+    const dispatch = useDispatch()
     const [data, setData] = useState({});
     const [user, setUser] = useState({});
     const handleChange = (e) => {
@@ -43,24 +53,27 @@ const Modals = (props) => {
             [name]: value
         })
     }
-    // const handleSubmit = (e) => {
-    //     const create = {
-    //         userId: data.userId,
-    //         name: data.name,
-    //         surname: data.surname,
-    //         advisorId: data.advisorId,
-    //         user: user
-    //     }
-    //     e.preventDefault();
-    //     dispatch(AddStudents({ ...create }));
-    //     document.getElementById("resetStudent").reset()
-    // }
+    const handleSubmit = (e) => {
+        const create = {
+            name: data.name,
+            surname: data.surname,
+            departmentId: data.departmentId,
+            user: user
+        }
+        e.preventDefault();
+        dispatch(updateAdvisor({ ...create },advisor.id));
+        document.getElementById("resetAdvisor").reset()
+        props.setModal(!props.modal)
+    }
+    useEffect(() => {
+        dispatch(fetchDepartment());
+    }, [dispatch]);
   return (
     <CRow>
           <CCardBody>
               <CModal 
               show={props.modal} 
-              onClose={() => props.setModal(!props.modal)}
+              onClose={() => {props.setModal(!props.modal); document.getElementById("resetAdvisor").reset()}}
               color="primary"
             >
               <CModalHeader closeButton>
@@ -68,21 +81,13 @@ const Modals = (props) => {
               </CModalHeader>
               <CModalBody>
               <CCardBody>
-                    <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" id="resetStudent">
-                        <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Student ID</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="number" name="userId" onChange={handleChange} />
-                            </CCol>
-                        </CFormGroup>
+                    <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" id="resetAdvisor">
                         <CFormGroup row>
                             <CCol md="3">
                                 <CLabel htmlFor="number-input">Name</CLabel>
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CInput id="number-input" type="text" name="name" onChange={handleChange} />
+                                <CInput id="number-input" type="text" name="name" onChange={handleChange} defaultValue={advisor?.name} />
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>
@@ -90,7 +95,7 @@ const Modals = (props) => {
                                 <CLabel htmlFor="number-input">Surname</CLabel>
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CInput id="number-input" type="text" name="surname" onChange={handleChange} />
+                                <CInput id="number-input" type="text" name="surname" onChange={handleChange} defaultValue={advisor?.surname}/>
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>
@@ -119,23 +124,14 @@ const Modals = (props) => {
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="date-input">Date of birth</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput type="date" id="date-input" name="dob" />
-                            </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol md="3">advisor
+                            <CCol md="3">Department
                                 <CLabel htmlFor="select">Select</CLabel>
                             </CCol>
                             <CCol xs="12" md="9">
-                                <CSelect custom name="select" id="select">
-                                    <option value="0">Please select</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
+                                <CSelect custom name="departmentId" id="select" onChange={handleChange} >
+                                    <option value="0">Please select</option>{department?.map(dep=>
+                                    <option value={dep.id}>{dep.name}</option>
+                                        )}
                                 </CSelect>
                             </CCol>
                         </CFormGroup>
@@ -143,7 +139,7 @@ const Modals = (props) => {
                 </CCardBody>
               </CModalBody>
               <CModalFooter>
-                <CButton color="primary" onClick={() => props.setModal(!props.modal)}>
+                <CButton color="primary" onClick={handleSubmit}>
                   Save changes
                 </CButton>{' '}
                 <CButton color="secondary" onClick={() =>  props.setModal(!props.modal)}>

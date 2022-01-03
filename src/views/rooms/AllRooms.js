@@ -6,7 +6,7 @@ import {
   CButton,
 } from '@coreui/react'
 import {
-  fetchRooms, getRooms
+  fetchRooms, getRooms,deleteRooms
 } from "../../actions/roomActions";
 import {
   fetchBuildings
@@ -65,7 +65,10 @@ const AllRooms = () => {
           >
             Edit
           </span>
-          <span >
+          <span  onClick={() => {
+                  dispatch(deleteRooms(row.id))
+                  // getDepartmentData(row.id);
+                }}>
             Delete
           </span>
         </div>

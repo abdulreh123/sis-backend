@@ -6,7 +6,7 @@ import {
   CButton,
 } from '@coreui/react'
 import {
-  fetchBuildings,getBuildings
+  fetchBuildings,getBuildings,deleteBuildings,
 } from "../../actions/buildingActions";
 import Add from './Create'
 import Edit from './Edit'
@@ -52,7 +52,9 @@ const AllBuildings = () => {
               >
                   Edit
               </span>
-              <span >
+              <span  onClick={() => {
+                  dispatch(deleteBuildings(row.id));
+                }}>
                   Delete
               </span>
             </div>

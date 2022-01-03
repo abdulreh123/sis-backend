@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import CIcon from '@coreui/icons-react'
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+import {
+    fetchChairman,
+} from "../../actions/chairmanActions";
 import {
     CButton,
     CCard,
@@ -18,6 +21,8 @@ import {
     AddDepartment,
 } from "../../actions/departmentActions";
 const Create = () => {
+    
+    const chairman = useSelector((state) => state.chairmans.chairmans);
     const [data, setData] = useState({});
     const dispatch = useDispatch();
 
@@ -44,7 +49,9 @@ const Create = () => {
     const reset = (e) => {
         document.getElementById("resetDepartment").reset()
     }
-
+    useEffect(() => {
+        dispatch(fetchChairman());
+    }, [dispatch]);
     return (
         <CCol xs="12" md="15">
             <CCard>
@@ -67,10 +74,9 @@ const Create = () => {
                             </CCol>
                             <CCol xs="12" md="9">
                                 <CSelect custom name="chairmanId" id="select" onChange={handleChange}>
-                                    <option value="0">Please select</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
+                                    <option value="0">Please select</option>{chairman?.map(dep=>
+                                    <option value={dep.id}>{dep.name}</option>
+                                        )}
                                 </CSelect>
                             </CCol>
                         </CFormGroup>

@@ -11,9 +11,11 @@ import roomReducer from './RoomReducer'
 import paymentReducer from './paymentReducer'
 import sidebarReducer from './sidebarReducer'
 import announcementReducer from './announcementReducer'
+import chairmanReducer from './chairmanReducer'
 export default combineReducers({
     auth:authReducer,
     student: studentReducer,
+    chairmans: chairmanReducer,
     advisor:advisorReducer,
     department: departmentReducer,
     courses:courseReducer,

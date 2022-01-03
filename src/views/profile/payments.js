@@ -38,7 +38,7 @@ const MyPayments = (props) => {
           selector: "receipt",
           name: "Receipt",
           sortable: true,
-          cell: row => (<span onClick={()=>openInNewTab(row.image)}>receipt</span>)
+          cell: row => (<span style={{cursor:"pointer"}} onClick={()=>openInNewTab(row.image)}>receipt</span>)
         },
         {
           name: "Actions",

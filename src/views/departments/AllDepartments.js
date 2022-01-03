@@ -1,15 +1,22 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
+import Edit from './Edit'
 import {
-  fetchDepartment
+  fetchDepartment,deleteDepartment,getDepartment
 } from "../../actions/departmentActions";
+import {
+    fetchChairman,
+} from "../../actions/chairmanActions";
 const AllDepartments = () => {
     const departments = useSelector((state) => state.department.departments);
+    const user = useSelector((state) => state.auth.user);
     const department = useSelector((state) => state.department.department);
+    const [editModal, toggleEditModal] = useState(false)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchDepartment());
+        dispatch(fetchChairman());
     }, [dispatch,department]);
 
     let columns = [
@@ -28,15 +35,18 @@ const AllDepartments = () => {
           cell: (row) => (
             <div className="table-icon">
               <span
-              style={{margin: '1rem'}}
-                // onClick={() => {
-                //   toggleEditModal(!editModal);
-                //   getDepartmentData(row.id);
-                // }}
+              style={{margin: '1rem',cursor:"pointer"}}
+                onClick={() => {
+                  toggleEditModal(!editModal);
+                  dispatch(getDepartment(row.id));
+                }}
               >
                   Edit
               </span>
-              <span >
+              <span style={{cursor:"pointer"}}  onClick={() => {
+                  dispatch(deleteDepartment(row.id))
+                  // getDepartmentData(row.id);
+                }}>
                   Delete
               </span>
             </div>
@@ -45,11 +55,13 @@ const AllDepartments = () => {
           allowOverflow: true,
         },
       ];
+      
+      const studentCol = columns.filter(col=>col.name!=="Actions");
   return (
       <>
-    
+    <Edit modal={editModal} setModal={toggleEditModal}/>
     <DataTable
-            columns={columns}
+            columns={user?.status==='Chairman'|| user?.status==='SuperAdmin'	?columns :studentCol}
             data={departments ? departments : []}
             striped={true}
             responsive={true}

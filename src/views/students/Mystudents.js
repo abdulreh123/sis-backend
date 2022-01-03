@@ -35,10 +35,6 @@ const MyStudent = () => {
            
         },
         {
-          selector: "surname",
-          name: "Surname",
-          sortable: true,},
-        {
           selector: "createdAt",
           name: "Registered",
           cell: row => (<span>{row?.createdAt?.replace('T', ' ').replace('.000Z', '')}</span>),

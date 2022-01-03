@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
 import Edit from './EditCourse'
 import {
-  fetchCourses, getCourse
+  fetchCourses, getCourse,deleteCourse
 } from "../../actions/coursesActions";
 const AllCourses = () => {
     const courses = useSelector((state) => state.courses.courses);
@@ -55,7 +55,11 @@ const AllCourses = () => {
               >
                   Edit
               </span>
-              <span >
+              <span    style={{cursor:"pointer"}}
+               onClick={() => {
+                 dispatch(deleteCourse(row.id))
+                 // getDepartmentData(row.id);
+               }} >
                   Delete
               </span>
             </div>
@@ -64,12 +68,12 @@ const AllCourses = () => {
           allowOverflow: true,
         },
       ];
-      const studentCol = columns.filter(col=>col.name!=="Action");
+      const studentCol = columns.filter(col=>col.name!=="Actions");
   return (
       <>
       <Edit modal={modal} setModal={setModal}/>
     <DataTable
-            columns={user.status==='Student'?studentCol :columns}
+            columns={user?.status==='Chairman'|| user?.status==='SuperAdmin'	?columns :studentCol}
             data={StudentDepartment ? StudentDepartment : []}
             striped={true}
             responsive={true}
