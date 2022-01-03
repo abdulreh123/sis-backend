@@ -64,11 +64,12 @@ const AllCourses = () => {
           allowOverflow: true,
         },
       ];
+      const studentCol = columns.filter(col=>col.name!=="Action");
   return (
       <>
       <Edit modal={modal} setModal={setModal}/>
     <DataTable
-            columns={columns}
+            columns={user.status==='Student'?studentCol :columns}
             data={StudentDepartment ? StudentDepartment : []}
             striped={true}
             responsive={true}
