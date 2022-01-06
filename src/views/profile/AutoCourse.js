@@ -52,13 +52,13 @@ const Modals = (props) => {
             selector: "code",
             name: "Code",
             sortable: true,
-            cell:(row) => (<span>{row.Course.code}</span>)
+            cell:(row) => (<span>{row.Course? row.Course.code:row.code}</span>)
         },
         {
             selector: "credit",
             name: "Credit",
             sortable: true,
-            cell:(row) => (<span>{row.Course.credit}</span>)
+            cell:(row) => (<span>{row.Course? row.Course.credit:row.code}</span>)
         },
     ];
     const rowSelectChange = (row) => {
