@@ -52,13 +52,13 @@ const Modals = (props) => {
             selector: "code",
             name: "Code",
             sortable: true,
-            cell:(row) => (<span>{row.Course.code}</span>)
+            cell:(row) => (<span>{row.Course? row.Course?.code :row.code}</span>)
         },
         {
             selector: "credit",
             name: "Credit",
             sortable: true,
-            cell:(row) => (<span>{row.Course.credit}</span>)
+            cell:(row) => (<span>{row.Course? row.Course?.credit: row.credit}</span>)
         },
     ];
     const rowSelectChange = (row) => {
@@ -85,13 +85,14 @@ const Modals = (props) => {
         courses:courses
     }
     dispatch(AddRemoveCourses(studentId,{ ...create }));
+    setSelected([])
     }
     return (
         <CRow>
             <CCardBody>
                 <CModal
                     show={props.modal}
-                    onClose={() => {props.setModal(!props.modal);showButton(false)}}
+                    onClose={() => {props.setModal(!props.modal);showButton(false);setSelected([])}}
                     color="primary"
                     size="lg"
                 >
@@ -113,7 +114,7 @@ const Modals = (props) => {
                                 </CFormGroup>
                             </CForm>
                             
-                            {courses.length > 0 ?
+                            {courses[0].Course?
                               
                                 <DataTable
                                     columns={columns}
@@ -126,7 +127,17 @@ const Modals = (props) => {
                                     selectableRows
                                     onSelectedRowsChange={rowSelectChange}
                                     noHeader={true}
-                                /> : "no courses offers"}
+                                /> : 
+                                <DataTable
+                                    columns={columns}
+                                    data={courses ? courses : []}
+                                    striped={true}
+                                    responsive={true}
+                                    pagination={true}
+                                    highlightOnHover={true}
+                                    subHeaderAlign="center"
+                                    noHeader={true}
+                                />}
                         </CCardBody>
                         
                         {button? <CButton color="primary" onClick={submit}>Add</CButton>:null}
