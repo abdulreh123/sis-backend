@@ -72,6 +72,7 @@ const AllCourses = () => {
   return (
       <>
       <Edit modal={modal} setModal={setModal}/>
+    <h2>{user?.department?.name} courses</h2>
     <DataTable
             columns={user?.status==='Chairman'|| user?.status==='SuperAdmin'	?columns :studentCol}
             data={StudentDepartment ? StudentDepartment : []}

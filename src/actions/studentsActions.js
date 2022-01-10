@@ -54,7 +54,7 @@ export const getStudent = (id) => dispatch => {
         })
 }
 export const getTimeTable = (id) => dispatch => {
-    axios.get(`/api/student/time-table/${id}?year=2021-2022 - Spring`,  )
+    axios.get(`/api/student/time-table/${id}?year=2021-2022 - Fall`,  )
         .then(branch => {
             dispatch({
                 type: GET_TIMETABLE,

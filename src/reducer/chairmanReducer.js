@@ -1,9 +1,10 @@
 import {
-    GET_CHAIRMANS,
+    GET_CHAIRMANS,ADD_CHAIRMANS
 } from '../actions/types';
 
 const initialState = {
     chairmans: [],
+    chairman: {},
 }
 
 export default (state = initialState, action) => {
@@ -13,6 +14,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 chairmans: action.payload
+            }
+        case ADD_CHAIRMANS:
+            return {
+                ...state,
+                chairman: action.payload
             }
         // case ADD_BUILDINGS:
         //     return {

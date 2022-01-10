@@ -90,8 +90,15 @@ const Modals = (props) => {
                             <CCol xs="12" md="9">
                                 <CSelect custom name="year" id="select" onChange={handleChange}>
                                     <option value="0">Please select</option>
+                                    <option value="2019-2020 - Fall">2019-2020 - Fall</option>
+                                    <option value="2019-2020 - Spring">2019-2020 - Spring</option>
+                                    <option value="2019-2020 - Summer">2019-2020 - Summer</option>
                                     <option value="2020-2021 - Fall">2020-2021 - Fall</option>
                                     <option value="2020-2021 - Spring">2020-2021 - Spring</option>
+                                    <option value="2020-2021 - Summer">2020-2021 - Summer</option>
+                                    <option value="2021-2022 - Fall">2021-2022 - Fall</option>
+                                    <option value="2021-2022 - Spring">2021-2022 - Spring</option>
+                                    <option value="2022-2023 - Fall">2022-2023 - Fall</option>
                                 </CSelect>
                             </CCol>
                         </CFormGroup>            

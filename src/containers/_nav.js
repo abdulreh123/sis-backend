@@ -43,9 +43,30 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavDropdown',
+    name: 'Chairman',
+    route: '/chairman',
+    icon: 'cil-user',
+    permissions:["SuperAdmin"],
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'All Chairman',
+        to: '/chairman',
+        permissions:["SuperAdmin"],
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Register Chairman',
+        to: '/registerChairman',
+        permissions:["SuperAdmin"],
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
     name: 'Advisors',
     route: '/advisor',
-    icon: 'cil-book',
+    icon: 'cil-user',
     permissions:['Chairman',"SuperAdmin"],
     _children: [
       {

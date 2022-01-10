@@ -1,6 +1,8 @@
 import React from 'react';
 
 const AllStudent = React.lazy(() => import('./views/students/AllStudent'));
+const AllChairman = React.lazy(() => import('./views/chairman/AllChairman'));
+const RegisterChairman = React.lazy(() => import('./views/chairman/Register'));
 const MyStudent = React.lazy(() => import('./views/students/Mystudents'));
 const StudentCourses = React.lazy(() => import('./views/courses/MyCourses'));
 const Register = React.lazy(() => import('./views/students/Register'));
@@ -39,6 +41,18 @@ export const routes = [
     name: 'All Studnets',
     component: AllStudent,
     permissions:['Advisor','Chairman',"SuperAdmin"]
+  },
+  {
+    path: '/chairman',
+    name: 'All Chairman',
+    component: AllChairman,
+    permissions:["SuperAdmin"]
+  },
+  {
+    path: '/registerChairman',
+    name: 'register Chairman',
+    component: RegisterChairman,
+    permissions:["SuperAdmin"]
   },
   {
     path: '/mystudent',

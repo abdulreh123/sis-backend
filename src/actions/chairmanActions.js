@@ -1,5 +1,6 @@
 import {
     GET_CHAIRMANS,
+    ADD_CHAIRMANS,
 } from './types';
 import axios from 'axios';
 import { returnErrors } from "./errorActions";
@@ -18,56 +19,56 @@ export const fetchChairman = () => dispatch => {
             dispatch(returnErrors(error.response.data.message, error.response.status));
         })
 }
-// export const getBuildings = (id) => dispatch => {
-//     axios.get(`/api/buildings/${id}`,  )
-//         .then(buildings => {
-//             dispatch({
-//                 type: ADD_BUILDINGS,
-//                 payload: buildings.data.data
-//             });
-//         })
-//         .catch(error => {
-//             dispatch(returnErrors(error.response.data.message, error.response.status));
-//         })
-// }
-// export const AddBuildings = (data) => (dispatch) => {
-//     axios.post("/api/buildings/create", data,  )
-//         .then(buildings => {
-//             dispatch({
-//                 type: ADD_BUILDINGS,
-//                 payload: buildings.data.data
-//             });
-//             dispatch(returnErrors(buildings.data.message, buildings.status));
-//         })
-//         .catch(error => {
-//             dispatch(returnErrors(error.response.data.message, error.response.status));
-//         })
+export const getChairman = (id) => dispatch => {
+    axios.get(`/api/chairman/${id}`,  )
+        .then(chairman => {
+            dispatch({
+                type: ADD_CHAIRMANS,
+                payload: chairman.data.data
+            });
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+}
+export const AddChairman = (data) => (dispatch) => {
+    axios.post("/api/chairman/create", data,  )
+        .then(chairman => {
+            dispatch({
+                type: ADD_CHAIRMANS,
+                payload: chairman.data.data
+            });
+            dispatch(returnErrors(chairman.data.message, chairman.status));
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 
-//  }
-// export const updateBuildings = (data, id) => (dispatch) => {
-//     axios.put(`/api/buildings/${id}`, data,  )
-//         .then(buildings => {
-//             dispatch({
-//                 type: ADD_BUILDINGS,
-//                 payload: buildings.data.data
-//             });
-//            dispatch(returnErrors(buildings.data.message, buildings.status));
-//         })
-//         .catch(error => {
-//             dispatch(returnErrors(error.response.data.message, error.response.status));
-//         })
+ }
+export const updateChairman = (data, id) => (dispatch) => {
+    axios.put(`/api/chairman/${id}`, data,  )
+        .then(chairman => {
+            dispatch({
+                type: ADD_CHAIRMANS,
+                payload: chairman.data.data
+            });
+           dispatch(returnErrors(chairman.data.message, chairman.status));
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
 
-// }
-// export const deleteBuildings = (id) => (dispatch) => {
+}
+export const deleteChairman = (id) => (dispatch) => {
 
-//     axios.delete(`/api/buildings/${id}`,  )
-//         .then(buildings => {
-//             dispatch({
-//                 type: ADD_BUILDINGS,
-//                 payload: buildings.data.data
-//             });
-//         })
-//         .catch(error => {
-//             dispatch(returnErrors(error.response.data.message, error.response.status));
-//         })
-// }
+    axios.delete(`/api/chairman/${id}`,  )
+        .then(chairman => {
+            dispatch({
+                type: ADD_CHAIRMANS,
+                payload: chairman.data.data
+            });
+        })
+        .catch(error => {
+            dispatch(returnErrors(error.response.data.message, error.response.status));
+        })
+}

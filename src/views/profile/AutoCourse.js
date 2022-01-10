@@ -114,7 +114,7 @@ const Modals = (props) => {
                                 </CFormGroup>
                             </CForm>
                             
-                            {courses[0].Course?
+                            {courses[0]?.Course?
                               
                                 <DataTable
                                     columns={columns}
