@@ -5,6 +5,9 @@ import {
     fetchAdvisor,
 } from "../../actions/advisorActions";
 import {
+    fetchDepartment,
+} from "../../actions/departmentActions";
+import {
     CButton,
     CCard,
     CCardBody,
@@ -24,13 +27,14 @@ const Register = () => {
     const [data, setData] = useState({});
     const [user, setUser] = useState({});
     const advisor = useSelector((state) => state.advisor.advisors);
+    const department = useSelector((state) => state.department.departments);
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
         const target = e.target;
         const value = target.value;
         const name = target.name;
-        if(name==='userId'||"advisorId"){
+        if(name==='userId'||"advisorId"||"departmentId"){
             setData({
                 ...data,
                 [name]: parseInt(value)
@@ -58,6 +62,7 @@ const Register = () => {
             passportNumber: data.passportNumber,
             nationality: data.nationality,
             advisorId: data.advisorId,
+            departmentId: data.departmentId,
             user: user
         }
         e.preventDefault();
@@ -66,6 +71,7 @@ const Register = () => {
     }
     useEffect(() => {
         dispatch(fetchAdvisor());
+        dispatch(fetchDepartment());
     }, [dispatch]);
     return (
         <CCol xs="12" md="15">
@@ -156,6 +162,17 @@ const Register = () => {
                                 <CSelect custom name="advisorId" id="select" onChange={handleChange}>
                                     <option value="0">Please select</option>{advisor?.map(dep=>
                                     <option value={dep.id}>{dep.name + " " + dep.surname}</option>
+                                        )}
+                                </CSelect>
+                            </CCol>
+                        </CFormGroup>
+                        <CFormGroup row>
+                            <CCol md="3">Department
+                            </CCol>
+                            <CCol xs="12" md="9">
+                                <CSelect custom name="departmentId" id="select" onChange={handleChange} >
+                                    <option value="0">Please select</option>{department?.map(dep=>
+                                    <option value={dep.id}>{dep.name}</option>
                                         )}
                                 </CSelect>
                             </CCol>
