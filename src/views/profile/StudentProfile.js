@@ -142,7 +142,9 @@ const StudentProfile = (props) => {
         }
     }, [dispatch, user, aprooved]);
     useEffect(() => {
-        // dispatch(predictedCgpa(cgpas));
+        if(cgpas.length>0){
+         dispatch(predictedCgpa(cgpas));
+        }
     }, [dispatch, courses]);
     return (
         <>
@@ -204,9 +206,9 @@ const StudentProfile = (props) => {
                                                 <td>Male</td>
                                             </tr>
                                             <tr>
-                                                <th width="30%">Predicted Cgpa</th>
+                                                <th width="30%">Graduation Cgpa</th>
                                                 <td width="2%">:</td>
-                                                <td>{/*{prediction?.result}*/}</td>
+                                                <td>{prediction?.result}</td>
                                             </tr>
                                             <tr>
                                                 <th width="30%">blood</th>
@@ -287,7 +289,7 @@ const StudentProfile = (props) => {
 
                                 )}
                             </DataTable>
-                            <Gpa>AVERAGE: {Number.parseFloat(course.gpa).toPrecision(3)} / OVERALL AVERAGE: {Number.parseFloat(course.cgpa).toPrecision(3)}/ STATUS : {course.status} / TOTAL : {course.totalcredit}</Gpa>
+                            <Gpa>GPA: {Number.parseFloat(course.gpa).toPrecision(3)} / CGPA: {Number.parseFloat(course.cgpa).toPrecision(3)}/ STATUS : {course.status} / TOTAL CREDIT : {course.totalcredit}</Gpa>
 
                         </div>
                     )}

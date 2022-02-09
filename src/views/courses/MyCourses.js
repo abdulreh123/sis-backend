@@ -85,7 +85,7 @@ const StudentCourses = () => {
 
                 )}
             </DataTable>
-                        <Gpa>AVERAGE: {Number.parseFloat(course.gpa).toPrecision(3)} / OVERALL AVERAGE: {Number.parseFloat(course.cgpa).toPrecision(3)}/ STATUS : {course.status} / TOTAL : {course.totalcredit}</Gpa>
+                        <Gpa>GPA: {Number.parseFloat(course.gpa).toPrecision(3)} / CGPA: {Number.parseFloat(course.cgpa).toPrecision(3)}/ STATUS : {course.status} / TOTAL CREDIT: {course.totalcredit}</Gpa>
 
         </div>
     )}

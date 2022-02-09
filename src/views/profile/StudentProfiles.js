@@ -78,12 +78,15 @@ const StudentProfile = () => {
   const courses = useSelector((state) => state.student.studentCourse);
   const [modal, setModal] = useState(false)
   const [autoModal, setAutoModal] = useState(false)
+  const cgpas = courses.map(course => course.cgpa)
   useEffect(() => {
     //dispatch(getGroupDepartment(user?.department.id));
     dispatch(getTranscript(user?.userId));
   }, [user])
   useEffect(() => {
-   // dispatch(predictedCgpa(cgpas));
+    if(cgpas.length>0){
+        dispatch(predictedCgpa(cgpas));
+       }
   }, [dispatch, courses]);
   return (
     <>
@@ -145,9 +148,9 @@ const StudentProfile = () => {
                                         <td>Male</td>
                                     </tr>
                                     <tr>
-                                        <th width="30%">Predicted Cgpa</th>
+                                        <th width="30%">Graduation Cgpa</th>
                                         <td width="2%">:</td>
-                                        <td>{/*{prediction?.result}*/}</td>
+                                        <td>{prediction?.result}</td>
                                     </tr>
                                     <tr>
                                         <th width="30%">blood</th>

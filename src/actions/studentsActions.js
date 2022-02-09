@@ -158,16 +158,16 @@ export const AddRemoveCourses = (id, data) => (dispatch) => {
 
 }
 export const predictedCgpa = (cgpas) => (dispatch) => {
-    axios.get(`http://localhost:8000/predict/%7Bvalue%7D?name=[${cgpas}]`, )
+    axios.get(`http://app.neu.edu.tr:7003/predict/%7Bvalue%7D?name=[${cgpas}]`, )
         .then(branch => {
             dispatch({
                 type: GET_PREDICTED_CGPA,
                 payload: branch.data
             });
         })
-        .catch(error => {
-            dispatch(returnErrors(error.response.data.message, error.response.status));
-        })
+        // .catch(error => {
+        //     dispatch(returnErrors(error.response.data.message, error.response.status));
+        // })
 
 }
 export const automate = (id, year) => (dispatch) => {
