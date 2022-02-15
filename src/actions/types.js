@@ -63,3 +63,4 @@ export const ADD_ANNOUNCEMENT = "ADD_ANNOUNCEMENT";
 
 export const GET_CHAIRMANS = "GET_CHAIRMANS";
 export const ADD_CHAIRMANS = "ADD_CHAIRMANS";
+export const GET_YEAR = "GET_YEAR";

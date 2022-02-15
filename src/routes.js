@@ -18,6 +18,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const CourseDashboard = React.lazy(() => import('./views/dashboard/CoursePage'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const Groups = React.lazy(() => import('./views/courses/Groups'));
+const Settings = React.lazy(() => import('./views/settings/settings'));
 const CreateGroups = React.lazy(() => import('./views/courses/CreateGroup'));
 const Buildings = React.lazy(() => import('./views/buildings/AllBuildings'));
 const Rooms = React.lazy(() => import('./views/rooms/AllRooms'));
@@ -92,6 +93,13 @@ export const routes = [
     name: 'Create Departments',
     exact: true,
     component: CreateDepartment,
+    permissions:['Chairman',"SuperAdmin"]
+  },
+  {
+    path: '/settings',
+    name: 'OfferCourses',
+    exact: true,
+    component: Settings,
     permissions:['Chairman',"SuperAdmin"]
   },
   {

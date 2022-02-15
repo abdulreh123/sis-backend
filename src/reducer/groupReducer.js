@@ -1,13 +1,15 @@
 import {
     GET_GROUPS,
     ADD_GROUP,
-    GET_DEPARTMENT_GROUP
+    GET_DEPARTMENT_GROUP,
+    GET_YEAR
 } from '../actions/types';
 
 const initialState = {
     groups: [],
     departmentGroups: [],
     group: {},
+    year:""
 }
 
 export default (state = initialState, action) => {
@@ -22,6 +24,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 departmentGroups: action.payload
+            }
+        case GET_YEAR:
+            return {
+                ...state,
+                year: action.payload
             }
         case ADD_GROUP:
             return {

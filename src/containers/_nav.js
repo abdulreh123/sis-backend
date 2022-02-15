@@ -185,6 +185,21 @@ const _nav =  [
       },
     ],
   },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Settings',
+    route: '/settings',
+    icon: 'cil-book',
+    permissions:['Chairman',"SuperAdmin"],
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Academic Year',
+        to: '/settings',
+        permissions:['Chairman',"SuperAdmin"]
+      },
+    ],
+  },
   
 ]
 export default _nav
