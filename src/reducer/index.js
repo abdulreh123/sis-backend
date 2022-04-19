@@ -12,6 +12,7 @@ import paymentReducer from './paymentReducer'
 import sidebarReducer from './sidebarReducer'
 import announcementReducer from './announcementReducer'
 import chairmanReducer from './chairmanReducer'
+import notificationReducer from './notificationReducer'
 export default combineReducers({
     auth:authReducer,
     student: studentReducer,
@@ -25,5 +26,6 @@ export default combineReducers({
     rooms:roomReducer,
     payments:paymentReducer,
     sidebar:sidebarReducer,
-    announcements:announcementReducer
+    announcements:announcementReducer,
+    notifications:notificationReducer
 });

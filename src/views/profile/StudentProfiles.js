@@ -19,21 +19,21 @@ import AutoCourse from './AutoCourse'
 import styled from 'styled-components';
 import CIcon from '@coreui/icons-react'
 import {
-  getStudent, getTranscript, predictedCgpa
+   getTranscript, predictedCgpa
 } from "../../actions/studentsActions";
-import {
-  getGroupDepartment
-} from "../../actions/groupActions";
-const IMG = styled.img`
-  width:47%;
-  `
+// import {
+//   getGroupDepartment
+// } from "../../actions/groupActions";
+// const IMG = styled.img`
+//   width:47%;
+//   `
 
 const Button = styled(CButton)`
 margin-left: 1rem;
 `;
-const AddButton = styled(CButton)`
-margin-right: 1rem;
-`;
+// const AddButton = styled(CButton)`
+// margin-right: 1rem;
+// `;
 const Container = styled.div`
 display: grid;
 grid-template-columns:  25% 75%;

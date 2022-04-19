@@ -8,8 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     getStudentStats
 } from "../../actions/studentsActions";
-import ChartLineSimple from '../charts/ChartLineSimple'
-import ChartBarSimple from '../charts/ChartBarSimple'
+// import ChartLineSimple from '../charts/ChartLineSimple'
+// import ChartBarSimple from '../charts/ChartBarSimple'
 
 const WidgetsDropdown = () => {
   const user = useSelector((state) => state.auth.user);
