@@ -31,11 +31,13 @@ const MultiSelectLabel = styled.span`
 `;
 const Modals = (props) => {
     const studentId = props.studentId
+    let arrayYears =[]
     const [data, setData] = useState({});
     const [year, setyear] = useState('');
     const dispatch = useDispatch()
     const courses = useSelector((state) => state.group.departmentGroups);
     const yearCourses = courses.filter(course => course.year === year)
+    const user = useSelector((state) => state.auth.user);
     let courseOptions = yearCourses?.map((course) => ({
         id: course.id,
         name: course.name,
@@ -64,6 +66,16 @@ const Modals = (props) => {
         props.setModal(!props.modal)
         document.getElementById("resetAdd").reset()
     }
+    const acayear1 = user?JSON.parse(user?.year.slice(0,4)):2021
+    const years=()=>{
+        console.log(acayear1)
+        for (let i = acayear1; i < acayear1+4; i++) {
+            arrayYears.push(`${i}-${i+1} - Fall`)
+            arrayYears.push(`${i}-${i+1} - Spring`)
+          }
+    }
+    
+    years()
     useEffect(() => {
         const courses = data?.courses?.map(course => course.id)
         if (courses !== undefined) {
@@ -88,15 +100,9 @@ const Modals = (props) => {
                                     <MultiSelectLabel>Acadamic Year :</MultiSelectLabel>
                                     <CSelect custom name="select" id="select" onChange={handleChange}>
                                         <option value="0">Please select</option>
-                                        <option value="2019-2020 - Fall">2019-2020 - Fall</option>
-                                    <option value="2019-2020 - Spring">2019-2020 - Spring</option>
-                                    <option value="2019-2020 - Summer">2019-2020 - Summer</option>
-                                    <option value="2020-2021 - Fall">2020-2021 - Fall</option>
-                                    <option value="2020-2021 - Spring">2020-2021 - Spring</option>
-                                    <option value="2020-2021 - Summer">2020-2021 - Summer</option>
-                                    <option value="2021-2022 - Fall">2021-2022 - Fall</option>
-                                    <option value="2021-2022 - Spring">2021-2022 - Spring</option>
-                                    <option value="2022-2023 - Fall">2022-2023 - Fall</option>
+                                        {arrayYears.map(yea=>
+                                        <option value={yea}>{yea}</option>
+                                            )}
                                     </CSelect>
                                     <MultiSelectLabel>Courses :</MultiSelectLabel>
                                     <MultiselectCosutm

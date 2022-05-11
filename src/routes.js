@@ -9,6 +9,8 @@ const Register = React.lazy(() => import('./views/students/Register'));
 const RegisterAdvisor = React.lazy(() => import('./views/advisor/Register'));
 const CreateDepartment = React.lazy(() => import('./views/departments/Create'));
 const Department = React.lazy(() => import('./views/departments/AllDepartments'));
+const Faculties = React.lazy(() => import('./views/faculties/AllFaculties'));
+const CreateFaculties = React.lazy(() => import('./views/faculties/Create'));
 const Courses = React.lazy(() => import('./views/courses/AllCourses'));
 const AllAdvisors = React.lazy(() => import('./views/advisor/AllAdvisors'));
 const Advisors = React.lazy(() => import('./views/advisor/Advisor'));
@@ -93,6 +95,20 @@ export const routes = [
     name: 'Create Departments',
     exact: true,
     component: CreateDepartment,
+    permissions:['Chairman',"SuperAdmin"]
+  },
+  {
+    path: '/faculties',
+    name: 'Faculties',
+    exact: true,
+    component: Faculties,
+    permissions:['Chairman',"SuperAdmin"]
+  },
+  {
+    path: '/createFaculty',
+    name: 'Create Faculties',
+    exact: true,
+    component: CreateFaculties,
     permissions:['Chairman',"SuperAdmin"]
   },
   {

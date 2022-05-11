@@ -22,6 +22,9 @@ export const GET_PREDICTED_CGPA = "GET_PREDICTED_CGPA";
 export const GET_DEPARMENTS = "GET_DEPARMENTS";
 export const ADD_DEPARTMENT = "ADD_DEPARTMENT";
 
+export const ADD_FACULTY = "ADD_FACULTY";
+export const GET_FACULTY = "GET_FACULTY";
+
 export const GET_ADVISOR = "GET_ADVISOR";
 export const ADD_ADVISOR = "ADD_ADVISOR";
 

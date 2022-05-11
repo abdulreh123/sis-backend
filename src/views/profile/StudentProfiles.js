@@ -106,7 +106,7 @@ const StudentProfile = () => {
             </div>
             <div style={{ display: 'flex', padding: '0rem 0rem 0.5rem 1rem' }}>
                 <CIcon name="cil-user" />
-                <h3 style={{ color: 'black', padding: '0rem 0rem 0rem 1rem', fontSize: '0.8rem' }}>Computer Engineering</h3>
+                <h3 style={{ color: 'black', padding: '0rem 0rem 0rem 1rem', fontSize: '0.8rem' }}>{user?.department?.name}</h3>
             </div>
             <div style={{ display: 'flex', padding: '0rem 0rem 0.5rem 1rem' }}>
                 <CIcon name="cil-bookmark" />
@@ -148,7 +148,7 @@ const StudentProfile = () => {
                                         <td>Male</td>
                                     </tr>
                                     <tr>
-                                        <th width="30%">Graduation Cgpa</th>
+                                        <th width="30%">Predicted Graduation Cgpa</th>
                                         <td width="2%">:</td>
                                         <td>{prediction?.result}</td>
                                     </tr>

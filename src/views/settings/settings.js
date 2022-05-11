@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     OfferCourses, getYear, setYear
 } from "../../actions/groupActions";
+import styled from 'styled-components'
 import {
     CButton,
     CCard,
@@ -13,13 +14,17 @@ import {
     CCol,
     CForm,
     CFormGroup,
-    CInput,
-    CLabel,
+    CSelect
 } from '@coreui/react'
+const MultiSelectLabel = styled.span`
+  font-size: 0.8rem;
+  color: var(--secondary-text-color);
+`;
 const Settings = () => {
     const [data, setData] = useState({});
     const dispatch = useDispatch();
     const year = useSelector((state) => state.group.year);
+    let arrayYears = []
 
     const handleChange = (e) => {
         const target = e.target;
@@ -38,6 +43,15 @@ const Settings = () => {
     useEffect(() => {
         dispatch(getYear())
     }, [dispatch]);
+    const acayear1 = year? JSON.parse(year?.slice(0, 4)):2021
+    const years = () => {
+        for (let i = acayear1; i < acayear1 + 4; i++) {
+            arrayYears.push(`${i}-${i + 1} - Fall`)
+            arrayYears.push(`${i}-${i + 1} - Spring`)
+        }
+    }
+
+    years()
     return (
         <CCol xs="12" md="15">
             <CCard>
@@ -47,19 +61,22 @@ const Settings = () => {
                 <CCardBody>
                     <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" id="resetStudent">
                         <CFormGroup row>
-                            <CCol md="3">
-                                <CLabel htmlFor="number-input">Academic Year</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CInput id="number-input" type="text" name="year" onChange={handleChange} defaultValue={year} />
-                            </CCol>
+                            <MultiSelectLabel>Acadamic Year :</MultiSelectLabel>
+                            <CSelect custom name="year" id="select" onChange={handleChange}>
+                                <option value="0">Please select</option>
+                                {arrayYears.map(yea =>
+                                    <option value={yea}
+                                    selected={yea === year ? "'selected'" : null}
+                                    >{yea}</option>
+                                )}
+                            </CSelect>
                         </CFormGroup>
 
                     </CForm>
                 </CCardBody>
                 <CCardFooter>
                     <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" onClick={handleSubmit} /> Submit</CButton>
-                    <CButton type="reset" size="sm" color="primary"><CIcon name="cil-scrubber" onClick={()=>{dispatch(OfferCourses())}}/>Offer Courses</CButton>
+                    <CButton type="reset" size="sm" color="primary"><CIcon name="cil-scrubber" onClick={() => { dispatch(OfferCourses()) }} />Offer Courses</CButton>
                 </CCardFooter>
             </CCard>
         </CCol>

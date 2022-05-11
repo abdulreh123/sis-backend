@@ -18,7 +18,6 @@ const _nav =  [
     _tag: 'CSidebarNavDropdown',
     name: 'Students',
     route: '/students',
-    icon: 'cil-user',
     permissions:['Advisor','Chairman',"SuperAdmin"],
     _children: [
       {
@@ -45,7 +44,6 @@ const _nav =  [
     _tag: 'CSidebarNavDropdown',
     name: 'Chairman',
     route: '/chairman',
-    icon: 'cil-user',
     permissions:["SuperAdmin"],
     _children: [
       {
@@ -66,7 +64,6 @@ const _nav =  [
     _tag: 'CSidebarNavDropdown',
     name: 'Advisors',
     route: '/advisor',
-    icon: 'cil-user',
     permissions:['Chairman',"SuperAdmin"],
     _children: [
       {
@@ -93,7 +90,6 @@ const _nav =  [
     _tag: 'CSidebarNavDropdown',
     name: 'Departments',
     route: '/departments',
-    icon: 'cil-building',
     permissions:["SuperAdmin"],
     _children: [
       {
@@ -112,9 +108,28 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavDropdown',
+    name: 'Faculties',
+    route: '/faculties',
+    permissions:["SuperAdmin"],
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'faculties',
+        to: '/faculties',
+        permissions:["SuperAdmin"]
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Create Faculties',
+        to: '/createFaculty',
+        permissions:["SuperAdmin"]
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
     name: 'Courses',
     route: '/courses',
-    icon: 'cil-bookmark',
     permissions:['Student','Advisor','Chairman',"SuperAdmin"],
     _children: [
       {
@@ -141,7 +156,6 @@ const _nav =  [
     _tag: 'CSidebarNavDropdown',
     name: 'Groups',
     route: '/groups',
-    icon: 'cil-book',
     permissions:['Chairman',"SuperAdmin"],
     _children: [
       {
@@ -162,7 +176,6 @@ const _nav =  [
     _tag: 'CSidebarNavDropdown',
     name: 'Buildings',
     route: '/buildings',
-    icon: 'cil-book',
     permissions:['Chairman',"SuperAdmin"],
     _children: [
       {
@@ -189,7 +202,6 @@ const _nav =  [
     _tag: 'CSidebarNavDropdown',
     name: 'Settings',
     route: '/settings',
-    icon: 'cil-book',
     permissions:['Chairman',"SuperAdmin"],
     _children: [
       {

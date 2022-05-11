@@ -31,17 +31,29 @@ const MultiSelectLabel = styled.span`
 
 const Modals = (props) => {
     const studentId = props.studentId
+    let arrayYears =[]
     const dispatch = useDispatch()
     const [selected, setSelected] = useState([])
     const [button, showButton] = useState(false)
     const [year, setyear] = useState('');
     const courses = useSelector((state) => state.student.autoCourse);
+    const user = useSelector((state) => state.auth.user);
     const handleChange = (e) => {
         const target = e.target;
         const value = target.value;
         setyear(value)
         dispatch(automate(studentId, value));
     }
+    const acayear1 =user? JSON.parse(user?.year.slice(0,4)):2021
+    const years=()=>{
+        console.log(acayear1)
+        for (let i = acayear1; i < acayear1+4; i++) {
+            arrayYears.push(`${i}-${i+1} - Fall`)
+            arrayYears.push(`${i}-${i+1} - Spring`)
+          }
+    }
+
+    years()
     let columns = [
         {
             selector: "name",
@@ -106,10 +118,9 @@ const Modals = (props) => {
                                     <MultiSelectLabel>Acadamic Year :</MultiSelectLabel>
                                     <CSelect custom name="select" id="select" onChange={handleChange}>
                                         <option value="0">Please select</option>
-                                        <option value="2021-2022 - Fall">2021-2022 - Fall</option>
-                                        <option value="2021-2022 - Spring">2021-2022 - Spring</option>
-                                        <option value="2021-2022 - Summer">2021-2022 - Summer</option>
-                                        <option value="2022-2023 - Fall">2022-2023 - Fall</option>
+                                        {arrayYears.map(yea=>
+                                        <option value={yea}>{yea}</option>
+                                            )}
                                     </CSelect>
                                 </CFormGroup>
                             </CForm>

@@ -1,16 +1,45 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {
   CBadge,
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-  CProgress
+  CProgress,
+  CImg
 } from '@coreui/react'
+import styled from 'styled-components'
 import CIcon from '@coreui/icons-react'
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getNotifications
+} from "../actions/notificationActions";
 
+const Image = styled(CImg)`
+width:27% !important
+`
+const Menu = styled(CDropdownMenu)`
+width:23rem !important
+`
+const Item = styled(CDropdownItem)`
+white-space: break-spaces;
+`
 const TheHeaderDropdownNotif = () => {
-  const itemsCount = 5
+  const user = useSelector((state) => state.auth.user);
+  const notifications = useSelector((state) => state.notifications.general);
+  const itemsCount1 = notifications.length>9?"9+":notifications.length
+  const itemsCount = notifications.length===0? null :itemsCount1
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if(user?.status==="Advisor"){
+      dispatch(getNotifications(user.Id));
+    }else{
+      if(user?.userId){
+        dispatch(getNotifications(user?.userId));
+      }
+    }
+  }, [dispatch,user]);
   return (
     <CDropdown
       inNav
@@ -20,7 +49,7 @@ const TheHeaderDropdownNotif = () => {
         <CIcon name="cil-bell"/>
         <CBadge shape="pill" color="danger">{itemsCount}</CBadge>
       </CDropdownToggle>
-      <CDropdownMenu  placement="bottom-end" className="pt-0">
+      <Menu  placement="bottom-end" className="pt-0">
         <CDropdownItem
           header
           tag="div"
@@ -29,18 +58,13 @@ const TheHeaderDropdownNotif = () => {
         >
           <strong>You have {itemsCount} notifications</strong>
         </CDropdownItem>
-        {/* <CDropdownItem><CIcon name="cil-user-follow" className="mr-2 text-success" /> New user registered</CDropdownItem>
-        <CDropdownItem><CIcon name="cil-user-unfollow" className="mr-2 text-danger" /> User deleted</CDropdownItem>
-        <CDropdownItem><CIcon name="cil-chart-pie" className="mr-2 text-info" /> Sales report is ready</CDropdownItem>
-        <CDropdownItem><CIcon name="cil-basket" className="mr-2 text-primary" /> New client</CDropdownItem>
-        <CDropdownItem><CIcon name="cil-speedometer" className="mr-2 text-warning" /> Server overloaded</CDropdownItem> */}
-        <CDropdownItem
-          header
-          tag="div"
-          color="light"
-        >
-          {/* <strong>Server</strong> */}
-        </CDropdownItem>
+        {notifications?.map((state, index) => (
+          <Item>  <Image
+                src={'https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg'}
+                className="c-avatar-img"
+                alt="admin@bootstrapmaster.com"
+              /> {state.content}</Item>
+                ))}
         {/* <CDropdownItem className="d-block">
           <div className="text-uppercase mb-1">
             <small><b>CPU Usage</b></small>
@@ -62,7 +86,7 @@ const TheHeaderDropdownNotif = () => {
           <CProgress size="xs" color="danger" value={90} />
           <small className="text-muted">243GB/256GB</small>
         </CDropdownItem> */}
-      </CDropdownMenu>
+      </Menu>
     </CDropdown>
   )
 }

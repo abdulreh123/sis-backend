@@ -140,7 +140,7 @@ const StudentProfile = (props) => {
             dispatch(getGroupDepartment(user?.advisor?.departmentId));
             dispatch(getTranscript(user?.userId));
         }
-    }, [dispatch, user, aprooved]);
+    }, [dispatch, user?.userId, aprooved]);
     useEffect(() => {
         if(cgpas.length>0){
          dispatch(predictedCgpa(cgpas));
@@ -164,7 +164,7 @@ const StudentProfile = (props) => {
                     </div>
                     <div style={{ display: 'flex', padding: '0rem 0rem 0.5rem 1rem' }}>
                         <CIcon name="cil-user" />
-                        <h3 style={{ color: 'black', padding: '0rem 0rem 0rem 1rem', fontSize: '0.8rem' }}>Computer Engineering</h3>
+                        <h3 style={{ color: 'black', padding: '0rem 0rem 0rem 1rem', fontSize: '0.8rem' }}>{user?.Department?.name}</h3>
                     </div>
                     <div style={{ display: 'flex', padding: '0rem 0rem 0.5rem 1rem' }}>
                         <CIcon name="cil-bookmark" />
@@ -205,11 +205,12 @@ const StudentProfile = (props) => {
                                                 <td width="2%">:</td>
                                                 <td>Male</td>
                                             </tr>
+                                            {user?.Department?.id!==5?
                                             <tr>
                                                 <th width="30%">Graduation Cgpa</th>
                                                 <td width="2%">:</td>
                                                 <td>{prediction?.result}</td>
-                                            </tr>
+                                            </tr>:null}
                                             <tr>
                                                 <th width="30%">blood</th>
                                                 <td width="2%">:</td>

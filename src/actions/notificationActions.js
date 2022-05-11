@@ -14,6 +14,7 @@ import axios from 'axios'
 import { returnErrors } from './errorActions'
 
 export const getNotifications = (id) => async (dispatch) => {
+    console.log(id)
     dispatch({
         type: NOTIFICATION_LOADING,
     })
@@ -27,11 +28,11 @@ export const getNotifications = (id) => async (dispatch) => {
             })
         })
         .catch((error) => {
+            console.log(error)
             dispatch(
                 returnErrors(
                     error.response.data.message,
-                    error.response.status,
-                    id
+                    error.response.status
                 )
             )
         })

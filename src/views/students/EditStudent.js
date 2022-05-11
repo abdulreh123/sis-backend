@@ -57,6 +57,7 @@ const Modals = (props) => {
             name: data.name,
             surname: data.surname,
             advisorId: data.advisorId,
+            englishScore: data.englishScore,
             user: user
         }
         e.preventDefault();
@@ -149,6 +150,14 @@ const Modals = (props) => {
                                     <option value={dep.id} >{dep.name + " " + dep.surname}</option>
                                         )}
                                 </CSelect>
+                            </CCol>
+                        </CFormGroup>
+                        <CFormGroup row>
+                            <CCol md="3">
+                                <CLabel htmlFor="number-input">English Score</CLabel>
+                            </CCol>
+                            <CCol xs="12" md="9">
+                                <CInput id="number-input" type="number" name="englishScore" onChange={handleChange} defaultValue={student?.englishScore}/>
                             </CCol>
                         </CFormGroup>
                     </CForm>
