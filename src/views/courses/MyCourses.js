@@ -36,7 +36,7 @@ const DataTable = styled(Card)`
 `;
 const Cell = styled.div`
     border: 0.5px solid #E6E9ED;
-    height: 2rem;
+    height: 2.6rem;
     text-align: center;
     padding: 3px;
 `;
@@ -64,8 +64,6 @@ const StudentCourses = () => {
     const [count, setCount] = useState(true);
     const filter = courses.filter(course => course.gpa === null)
     const dispatch = useDispatch();
-    console.log(count)
-    console.log(courses.length>0)
     if (count && courses.length>0) {
         console.log(count)
         const preCrp = filter[0]?.courses?.filter(course => course.studentscourses.grade !== null)
