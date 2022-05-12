@@ -18,6 +18,9 @@ import {
   fetchDepartment
 } from "../../actions/departmentActions";
 import {
+  fetchFaculty
+} from "../../actions/facultyActions";
+import {
     AddCourse,
     fetchCourses
 } from "../../actions/coursesActions";
@@ -26,6 +29,7 @@ const Create = () => {
     const [department, setDepartment] = useState(0);
     const dispatch = useDispatch();
     const departments = useSelector((state) => state.department.departments);
+    const faculty = useSelector((state) => state.faculty.faculties);
     const courses = useSelector((state) => state.courses.courses);
    
     const handleChange = (e) => {
@@ -52,6 +56,7 @@ const Create = () => {
     useEffect(() => {
         dispatch(fetchDepartment());
         dispatch(fetchCourses());
+        dispatch(fetchFaculty());
     }, [dispatch]);
     return (
         <CCol xs="12" md="15">
@@ -83,6 +88,18 @@ const Create = () => {
                             </CCol>
                             <CCol xs="12" md="9">
                                 <CInput id="number-input" type="number" name="semester" onChange={handleChange} />
+                            </CCol>
+                        </CFormGroup>
+                        <CFormGroup row>
+                            <CCol md="3">Faculty
+                            </CCol>
+                            <CCol xs="12" md="9">
+                                <CSelect custom name="facultyId" id="select" onChange={handleChange}>
+                                    <option value="0">Please select</option>
+                                    {faculty.map(dep=>
+                                    <option value={dep.id}>{dep.name}</option>
+                                        )}
+                                </CSelect>
                             </CCol>
                         </CFormGroup>
                         <CFormGroup row>
