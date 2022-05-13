@@ -245,7 +245,8 @@ const StudentProfile = (props) => {
             const credit = filter.reduce((accumulator, object) => {
                 return accumulator + object.totalcredit;
             }, 0);
-                const data =[...cgpas,(sum + sum1)/(credit1 + credit)]
+            const newCgpa = cgpas.filter(cgpa=>cgpa!==null)
+                const data =[...newCgpa,(sum + sum1)/(credit1 + credit)]
                 dispatch(predictedCgpa(data));
             return ((sum + sum1)/(credit1 + credit)).toPrecision(3)
         }else{
