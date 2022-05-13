@@ -135,6 +135,7 @@ const StudentProfile = (props) => {
     const [autoModal, setAutoModal] = useState(false)
     const dispatch = useDispatch()
     const cgpas = courses.map(course => course.cgpa)
+    const newCgpa = cgpas.filter(cgpa=>cgpa!==null)
     const [data, setData] = useState([]);
     const [count, setCount] = useState(true);
     const filter = courses.filter(course => course.gpa === null)
@@ -150,8 +151,8 @@ const StudentProfile = (props) => {
         }
     }, [dispatch, user?.userId, aprooved]);
     useEffect(() => {
-        if(cgpas.length>0){
-         dispatch(predictedCgpa(cgpas));
+        if(newCgpa.length>0){
+         dispatch(predictedCgpa(newCgpa));
         }
     }, [dispatch, courses]);
     if (count && courses.length>0) {
@@ -245,7 +246,6 @@ const StudentProfile = (props) => {
             const credit = filter.reduce((accumulator, object) => {
                 return accumulator + object.totalcredit;
             }, 0);
-            const newCgpa = cgpas.filter(cgpa=>cgpa!==null)
                 const data =[...newCgpa,(sum + sum1)/(credit1 + credit)]
                 dispatch(predictedCgpa(data));
             return ((sum + sum1)/(credit1 + credit)).toPrecision(3)
