@@ -164,7 +164,7 @@ const StudentProfile = (props) => {
                 id: pre.id,
                 grade: pre.studentscourses.grade,
                 CrPts: JSON.parse(pre.studentscourses.CrPts),
-                credit: 3
+                credit: pre.Course.credit
             }
             setData(arr => [...arr, store])
         })
@@ -247,11 +247,11 @@ const StudentProfile = (props) => {
                 return accumulator + object.totalcredit;
             }, 0);
                 const data =[...newCgpa,(sum + sum1)/(credit1 + credit)]
-                dispatch(predictedCgpa(data));
+            //    dispatch(predictedCgpa(data));
             return ((sum + sum1)/(credit1 + credit)).toPrecision(3)
         }else{
                 const data =[(sum1 / credit1)]
-                dispatch(predictedCgpa(data)); 
+            //    dispatch(predictedCgpa(data)); 
             return (sum1 / credit1).toPrecision(3)
         }
     }
