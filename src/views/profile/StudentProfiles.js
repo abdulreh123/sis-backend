@@ -21,6 +21,9 @@ import CIcon from '@coreui/icons-react'
 import {
    getTranscript, predictedCgpa
 } from "../../actions/studentsActions";
+import {
+    getGroupDepartment
+} from "../../actions/groupActions";
 // import {
 //   getGroupDepartment
 // } from "../../actions/groupActions";
@@ -88,6 +91,9 @@ const StudentProfile = () => {
     if(newCgpa.length>0){
         dispatch(predictedCgpa(newCgpa));
        }
+       if (user?.userId) {
+        dispatch(getGroupDepartment(user?.departmentId));
+    }
   }, [dispatch, courses]);
   return (
     <>

@@ -118,9 +118,7 @@ const Modals = (props) => {
                                     <MultiSelectLabel>Acadamic Year :</MultiSelectLabel>
                                     <CSelect custom name="select" id="select" onChange={handleChange}>
                                         <option value="0">Please select</option>
-                                        {arrayYears.map(yea=>
-                                        <option value={yea}>{yea}</option>
-                                            )}
+                                        <option value={user?.year}>{user?.year}</option>
                                     </CSelect>
                                 </CFormGroup>
                             </CForm>

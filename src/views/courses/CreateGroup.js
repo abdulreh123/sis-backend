@@ -30,9 +30,11 @@ const Create = () => {
     const [data, setData] = useState({});
     const [department, setDepartment] = useState(0);
     const dispatch = useDispatch();
+    let arrayYears =[]
     const course = useSelector((state) => state.courses.courses);
     const advisor = useSelector((state) => state.advisor.advisors);
     const room = useSelector((state) => state.rooms.rooms);
+    const user = useSelector((state) => state.auth.user);
    
     const handleChange = (e) => {
         const target = e.target;
@@ -59,6 +61,17 @@ const Create = () => {
         dispatch(fetchRooms());
         dispatch(fetchAdvisor());
     }, [dispatch]);
+    const acayear1 = user?JSON.parse(user?.year.slice(0,4)):2021
+    const years=()=>{
+        console.log(acayear1)
+        for (let i = acayear1; i < acayear1+4; i++) {
+            arrayYears.push(`${i}-${i+1} - Fall`)
+            arrayYears.push(`${i}-${i+1} - Spring`)
+            arrayYears.push(`${i}-${i+1} - Summer`)
+          }
+    }
+    
+    years()
     return (
         <CCol xs="12" md="15">
             <CCard>
@@ -105,15 +118,9 @@ const Create = () => {
                             <CCol xs="12" md="9">
                                 <CSelect custom name="year" id="select" onChange={handleChange}>
                                     <option value="0">Please select</option>
-                                    <option value="2019-2020 - Fall">2019-2020 - Fall</option>
-                                    <option value="2019-2020 - Spring">2019-2020 - Spring</option>
-                                    <option value="2019-2020 - Summer">2019-2020 - Summer</option>
-                                    <option value="2020-2021 - Fall">2020-2021 - Fall</option>
-                                    <option value="2020-2021 - Spring">2020-2021 - Spring</option>
-                                    <option value="2020-2021 - Summer">2020-2021 - Summer</option>
-                                    <option value="2021-2022 - Fall">2021-2022 - Fall</option>
-                                    <option value="2021-2022 - Spring">2021-2022 - Spring</option>
-                                    <option value="2022-2023 - Fall">2022-2023 - Fall</option>
+                                    {arrayYears.map(yea=>
+                                        <option value={yea}>{yea}</option>
+                                            )}
                                 </CSelect>
                             </CCol>
                         </CFormGroup>

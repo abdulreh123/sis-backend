@@ -72,6 +72,7 @@ const Modals = (props) => {
         for (let i = acayear1; i < acayear1+4; i++) {
             arrayYears.push(`${i}-${i+1} - Fall`)
             arrayYears.push(`${i}-${i+1} - Spring`)
+            arrayYears.push(`${i}-${i+1} - Summer`)
           }
     }
     

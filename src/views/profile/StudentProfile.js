@@ -146,7 +146,7 @@ const StudentProfile = (props) => {
     }, [dispatch, student]);
     useEffect(() => {
         if (user?.userId) {
-            dispatch(getGroupDepartment(user?.advisor?.departmentId));
+            dispatch(getGroupDepartment(user?.departmentId));
             dispatch(getTranscript(user?.userId));
         }
     }, [dispatch, user?.userId, aprooved]);
@@ -316,7 +316,7 @@ const StudentProfile = (props) => {
                                             </tr>
                                             {user?.Department?.id!==5?
                                             <tr>
-                                                <th width="30%">Graduation Cgpa</th>
+                                                <th width="30%">Predicted Graduation Cgpa</th>
                                                 <td width="2%">:</td>
                                                 <td>{prediction?.result}</td>
                                             </tr>:null}
