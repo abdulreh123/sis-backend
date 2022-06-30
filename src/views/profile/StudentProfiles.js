@@ -83,6 +83,7 @@ const StudentProfile = () => {
   const [autoModal, setAutoModal] = useState(false)
   const cgpas = courses.map(course => course.cgpa)
   const newCgpa = cgpas.filter(cgpa=>cgpa!==null)
+  console.log(user)
   useEffect(() => {
     //dispatch(getGroupDepartment(user?.department.id));
     dispatch(getTranscript(user?.userId));
@@ -92,7 +93,7 @@ const StudentProfile = () => {
         dispatch(predictedCgpa(newCgpa));
        }
        if (user?.userId) {
-        dispatch(getGroupDepartment(user?.departmentId));
+        dispatch(getGroupDepartment(user?.department?.id));
     }
   }, [dispatch, courses]);
   return (
